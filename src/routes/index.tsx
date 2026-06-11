@@ -373,12 +373,13 @@ function WaitlistDialog({
               <CheckCircle2 className="h-7 w-7" />
             </div>
             <h3 className="mt-5 font-display text-2xl font-semibold">
-              Thanks for joining the waitlist!
+              You're in, {name.split(" ")[0] || "friend"} 🎉
             </h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              You're in, {name.split(" ")[0] || "friend"}. We'll ping you the moment{" "}
-              {interest ? interest.toLowerCase() : "something good"} pops up in{" "}
-              {city || "your city"}.
+              We're loading {interest ? interest.toLowerCase() : "things"} happening
+              around {city || "you"} right now. Your feed will be ready in a few
+              moments — we'll text you on {mobile ? mobile : "your number"} the
+              second it's live.
             </p>
             <button
               onClick={() => handleOpenChange(false)}
