@@ -222,6 +222,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           Log in to explore
         </button>
       </section>
+      <DesktopVideo />
     </div>
   );
 }
