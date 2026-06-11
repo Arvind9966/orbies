@@ -191,8 +191,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
       <VideoBackground />
       <Nav onOpen={onOpen} />
       <section
-        className="relative z-10 flex flex-col items-center justify-center px-6 pb-40 text-center"
-        style={{ paddingTop: "calc(8rem - 75px)" }}
+        className="relative z-10 flex flex-col items-center justify-start px-6 pb-16 pt-6 text-center sm:pt-10"
       >
         <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur">
           <span className="relative flex h-1.5 w-1.5">
