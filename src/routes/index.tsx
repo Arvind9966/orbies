@@ -177,13 +177,14 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             maxWidth: "80rem",
           }}
         >
-          See what's{" "}
+          Discover{" "}
           <span
             className="bg-clip-text text-transparent"
             style={{ backgroundImage: "var(--gradient-warm)" }}
           >
-            happening in Jaipur tonight
-          </span>
+            What's Happening
+          </span>{" "}
+          Around You
         </h1>
         <p
           className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed sm:text-lg"
