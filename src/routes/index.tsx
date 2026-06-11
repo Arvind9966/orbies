@@ -153,7 +153,7 @@ function DesktopVideo() {
     videoRef.current?.play().catch(() => {});
   }, []);
   return (
-    <div className="hidden md:block w-full px-6 pb-16">
+    <div className="hidden md:block w-full">
       <video
         ref={videoRef}
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
@@ -162,7 +162,7 @@ function DesktopVideo() {
         autoPlay
         loop
         preload="auto"
-        className="w-full h-auto rounded-2xl object-cover"
+        className="w-full h-auto object-cover"
       />
     </div>
   );
@@ -174,9 +174,9 @@ function Hero({ onOpen }: { onOpen: () => void }) {
       <VideoBackground />
       <Nav onOpen={onOpen} />
       <section
-        className="relative z-10 flex flex-col items-start justify-start px-6 pb-16 pt-6 text-left sm:pt-10"
+        className="relative z-10 flex flex-col items-start justify-start px-6 pb-16 pt-6 text-left sm:pt-10 md:items-center md:text-center md:pt-16 md:pb-10"
       >
-        <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur">
+        <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur md:self-center">
           <span className="relative flex h-1.5 w-1.5">
             <span
               className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
@@ -190,11 +190,10 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           Now live in Jaipur
         </span>
         <h1
-          className="animate-fade-rise mt-5 text-black text-balance"
+          className="animate-fade-rise mt-5 text-black text-balance text-[clamp(3rem,10vw,7rem)] md:text-[clamp(2.5rem,5.5vw,5rem)] md:max-w-5xl md:mx-auto"
           style={{
             fontFamily: '"Poppins", ui-sans-serif, system-ui, sans-serif',
             fontWeight: 900,
-            fontSize: "clamp(3rem, 10vw, 7rem)",
             lineHeight: 0.95,
             letterSpacing: "-0.04em",
             maxWidth: "80rem",
@@ -210,14 +209,14 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           Around You
         </h1>
         <p
-          className="animate-fade-rise-delay mt-8 max-w-4xl text-base leading-relaxed sm:text-lg line-clamp-2"
+          className="animate-fade-rise-delay mt-8 max-w-4xl text-base leading-relaxed sm:text-lg line-clamp-2 md:mx-auto md:max-w-2xl"
           style={{ color: "#6F6F6F" }}
         >
           Find events, communities, trips, volunteering opportunities and like-minded people in Jaipur — all in one place.
         </p>
         <button
           onClick={onOpen}
-          className="animate-fade-rise-delay-2 mt-12 rounded-full bg-black px-14 py-5 text-base text-white transition-transform hover:scale-[1.03]"
+          className="animate-fade-rise-delay-2 mt-12 rounded-full bg-black px-14 py-5 text-base text-white transition-transform hover:scale-[1.03] md:self-center md:mt-10"
         >
           Log in to explore
         </button>
