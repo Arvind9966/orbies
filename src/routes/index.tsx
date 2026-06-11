@@ -23,6 +23,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import orbiesLogo from "@/assets/orbies-logo-transparent.png.asset.json";
+import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -483,35 +484,43 @@ function Categories() {
         </p>
       </div>
 
-      <div className="mt-9 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-        {CATEGORIES.map(({ icon: Icon, title, desc }, i) => (
-          <article
-            key={title}
-            className="group relative overflow-hidden rounded-3xl border border-border bg-card/90 p-5 backdrop-blur transition active:scale-[0.99] hover:-translate-y-1 sm:p-7"
-            style={{ boxShadow: "var(--shadow-soft)" }}
-          >
-            <div
-              aria-hidden
-              className="absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-2xl transition group-hover:opacity-60"
-              style={{ background: "var(--gradient-warm)" }}
-            />
-            <div
-              className="relative grid h-11 w-11 place-items-center rounded-2xl text-primary-foreground sm:h-12 sm:w-12"
-              style={{ background: "var(--gradient-warm)" }}
+      <div className="mt-9 sm:mt-12">
+        <ScrollStack
+          useWindowScroll
+          itemDistance={60}
+          itemStackDistance={24}
+          baseScale={0.88}
+          stackPosition="22%"
+          scaleEndPosition="12%"
+        >
+          {CATEGORIES.map(({ icon: Icon, title, desc }, i) => (
+            <ScrollStackItem
+              key={title}
+              itemClassName="group overflow-hidden border border-border bg-card/95 backdrop-blur"
             >
-              <Icon className="h-5 w-5" />
-            </div>
-            <h3 className="relative mt-4 font-display text-[20px] font-semibold tracking-[-0.02em] sm:mt-5 sm:text-2xl">
-              {title}
-            </h3>
-            <p className="relative mt-1.5 text-[14px] leading-relaxed text-muted-foreground sm:text-sm">
-              {desc}
-            </p>
-            <span className="relative mt-5 inline-block text-[11px] font-medium text-foreground/40 sm:mt-6 sm:text-xs">
-              0{i + 1}
-            </span>
-          </article>
-        ))}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-50 blur-2xl"
+                style={{ background: "var(--gradient-warm)" }}
+              />
+              <div
+                className="relative grid h-12 w-12 place-items-center rounded-2xl text-primary-foreground sm:h-14 sm:w-14"
+                style={{ background: "var(--gradient-warm)" }}
+              >
+                <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+              </div>
+              <h3 className="relative mt-5 font-display text-[24px] font-semibold tracking-[-0.02em] sm:text-3xl">
+                {title}
+              </h3>
+              <p className="relative mt-2 max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-base">
+                {desc}
+              </p>
+              <span className="relative mt-6 inline-block text-[11px] font-medium text-foreground/40 sm:text-xs">
+                0{i + 1}
+              </span>
+            </ScrollStackItem>
+          ))}
+        </ScrollStack>
       </div>
     </section>
   );
