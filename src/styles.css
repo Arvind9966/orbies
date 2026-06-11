@@ -106,3 +106,13 @@
     background: oklch(0.65 0.18 250 / 0.25);
   }
 }
+
+@keyframes fade-rise {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-rise { animation: fade-rise 0.8s ease-out both; }
+.animate-fade-rise-delay { animation: fade-rise 0.8s ease-out 0.2s both; }
+.animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
+
+.font-serif-display { font-family: "Instrument Serif", ui-serif, Georgia, serif; }
