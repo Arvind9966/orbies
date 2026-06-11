@@ -142,18 +142,18 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         Now live in Jaipur
       </span>
       <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-        Discover what's{" "}
+        See what's{" "}
         <span
           className="bg-clip-text text-transparent"
           style={{ backgroundImage: "var(--gradient-warm)" }}
         >
-          happening around you
+          happening in Jaipur tonight
         </span>
       </h1>
       <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-        Find communities, events, trips, volunteering opportunities and
-        like-minded people — all in one place. No more digging through ten
-        WhatsApp groups.
+        2,400+ people are already on Orbies right now — discovering events,
+        trips, communities and meetups around them. Log in to see what's
+        happening near you.
       </p>
 
       <div className="mt-10 flex flex-col items-center gap-3">
@@ -165,11 +165,15 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             boxShadow: "var(--shadow-glow)",
           }}
         >
-          Get early access
+          Log in to explore
           <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
         </button>
-        <p className="text-sm text-muted-foreground">
-          Takes 20 seconds — be the first to know when something cool drops in your city.
+        <p className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+          </span>
+          128 people logged in over the last hour
         </p>
       </div>
 
@@ -256,9 +260,9 @@ function WaitlistDialog({
         {step === 1 && (
           <>
             <DialogHeader>
-              <DialogTitle className="font-display text-2xl">Let's get you in</DialogTitle>
+              <DialogTitle className="font-display text-2xl">Log in to Orbies</DialogTitle>
               <DialogDescription>
-                Just a few quick details so we can ping you when something pops up nearby.
+                Quick login so we can show you what's happening near you tonight.
               </DialogDescription>
             </DialogHeader>
             <div className="mt-2 space-y-4">
@@ -310,10 +314,10 @@ function WaitlistDialog({
           <>
             <DialogHeader>
               <DialogTitle className="font-display text-2xl">
-                What are you looking for on Orbies?
+                What do you want to see first?
               </DialogTitle>
               <DialogDescription>
-                Pick one — we'll start there. You can explore the rest later.
+                Pick one — we'll open your feed with this on top.
               </DialogDescription>
             </DialogHeader>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -353,7 +357,7 @@ function WaitlistDialog({
                   boxShadow: "var(--shadow-glow)",
                 }}
               >
-                {loading ? "Joining…" : "Join waitlist"}
+                {loading ? "Logging in…" : "Take me in"}
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
               </button>
             </div>
@@ -369,12 +373,13 @@ function WaitlistDialog({
               <CheckCircle2 className="h-7 w-7" />
             </div>
             <h3 className="mt-5 font-display text-2xl font-semibold">
-              Thanks for joining the waitlist!
+              You're in, {name.split(" ")[0] || "friend"} 🎉
             </h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              You're in, {name.split(" ")[0] || "friend"}. We'll ping you the moment{" "}
-              {interest ? interest.toLowerCase() : "something good"} pops up in{" "}
-              {city || "your city"}.
+              We're loading {interest ? interest.toLowerCase() : "things"} happening
+              around {city || "you"} right now. Your feed will be ready in a few
+              moments — we'll text you on {mobile ? mobile : "your number"} the
+              second it's live.
             </p>
             <button
               onClick={() => handleOpenChange(false)}
