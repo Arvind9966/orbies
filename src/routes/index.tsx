@@ -286,11 +286,11 @@ function WaitlistCard() {
           boxShadow: "var(--shadow-glow)",
         }}
       >
-        {loading ? "Joining…" : "Join the waitlist"}
+        {loading ? "Finding…" : "Notify me"}
         <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
       </button>
       <p className="mt-3 text-center text-xs text-muted-foreground">
-        No spam. We'll only message you when Orbies is ready.
+        No spam. You will be informed soon when something relevant shows up.
       </p>
 
       <style>{`
