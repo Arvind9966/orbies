@@ -200,17 +200,30 @@ const ScrollStack = ({
   }, [updateCardTransforms]);
 
   const setupLenis = useCallback(() => {
+    // On touch devices, native scroll is far smoother than Lenis syncTouch.
+    const isTouch =
+      typeof window !== 'undefined' &&
+      (window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window);
+
     if (useWindowScroll) {
+      if (isTouch) {
+        const onScroll = () => {
+          if (animationFrameRef.current) return;
+          animationFrameRef.current = requestAnimationFrame(() => {
+            animationFrameRef.current = null;
+            updateCardTransforms();
+          });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        (lenisRef as { current: unknown }).current = { destroy: () => window.removeEventListener('scroll', onScroll) };
+        return;
+      }
       const lenis = new Lenis({
-        duration: 1.2,
+        duration: 1.1,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        touchMultiplier: 2,
-        infinite: false,
         wheelMultiplier: 1,
-        lerp: 0.1,
-        syncTouch: true,
-        syncTouchLerp: 0.075,
+        lerp: 0.12,
       });
 
       lenis.on('scroll', handleScroll);
@@ -224,18 +237,26 @@ const ScrollStack = ({
     } else {
       const scroller = scrollerRef.current;
       if (!scroller) return;
+      if (isTouch) {
+        const onScroll = () => {
+          if (animationFrameRef.current) return;
+          animationFrameRef.current = requestAnimationFrame(() => {
+            animationFrameRef.current = null;
+            updateCardTransforms();
+          });
+        };
+        scroller.addEventListener('scroll', onScroll, { passive: true });
+        (lenisRef as { current: unknown }).current = { destroy: () => scroller.removeEventListener('scroll', onScroll) };
+        return;
+      }
       const lenis = new Lenis({
         wrapper: scroller,
         content: scroller.querySelector('.scroll-stack-inner') as HTMLElement,
-        duration: 1.2,
+        duration: 1.1,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        touchMultiplier: 2,
-        infinite: false,
         wheelMultiplier: 1,
-        lerp: 0.1,
-        syncTouch: true,
-        syncTouchLerp: 0.075,
+        lerp: 0.12,
       });
 
       lenis.on('scroll', handleScroll);
@@ -247,7 +268,7 @@ const ScrollStack = ({
       lenisRef.current = lenis;
       return lenis;
     }
-  }, [handleScroll, useWindowScroll]);
+  }, [handleScroll, useWindowScroll, updateCardTransforms]);
 
   useLayoutEffect(() => {
     const scroller = scrollerRef.current;
