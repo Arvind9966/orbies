@@ -170,7 +170,7 @@ function DesktopVideo() {
 
 function Hero({ onOpen }: { onOpen: () => void }) {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-white">
+    <div className="relative min-h-screen w-full overflow-hidden bg-white md:min-h-0">
       <VideoBackground />
       <Nav onOpen={onOpen} />
       <section
