@@ -22,7 +22,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import orbiesLogo from "@/assets/orbies-logo.png.asset.json";
+import orbiesLogo from "@/assets/orbies-logo-transparent.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -111,7 +111,7 @@ function Nav({ onOpen }: { onOpen: () => void }) {
   return (
     <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 sm:py-6">
       <a href="#" className="flex items-center">
-        <img src={orbiesLogo.url} alt="Orbies" className="h-8 w-auto sm:h-10" />
+        <img src={orbiesLogo.url} alt="Orbies" className="h-12 w-auto sm:h-14" />
       </a>
       <button
         onClick={onOpen}
