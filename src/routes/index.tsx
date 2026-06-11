@@ -108,19 +108,19 @@ function Index() {
 
 function Nav() {
   return (
-    <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
+    <header className="sticky top-0 z-30 mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5 backdrop-blur-xl bg-background/70 border-b border-border/60">
       <a href="#" className="flex items-center gap-2">
         <span
-          className="grid h-9 w-9 place-items-center rounded-full text-primary-foreground"
-          style={{ background: "var(--gradient-warm)" }}
+          className="grid h-8 w-8 place-items-center rounded-2xl text-primary-foreground"
+          style={{ background: "var(--gradient-warm)", boxShadow: "var(--shadow-glow)" }}
         >
-          <span className="font-display text-lg font-bold">O</span>
+          <span className="font-display text-sm font-bold">O</span>
         </span>
-        <span className="font-display text-xl font-semibold tracking-tight">Orbies</span>
+        <span className="font-display text-[17px] font-semibold tracking-tight">Orbies</span>
       </a>
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <MapPin className="h-3.5 w-3.5" />
-        <span>Starting in Jaipur</span>
+      <div className="flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+        <MapPin className="h-3 w-3" />
+        <span>Jaipur</span>
       </div>
     </header>
   );
@@ -128,21 +128,21 @@ function Nav() {
 
 function Hero({ onOpen }: { onOpen: () => void }) {
   return (
-    <section className="mx-auto max-w-3xl px-6 pb-16 pt-10 text-center lg:pb-24 lg:pt-16">
-      <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
+    <section className="mx-auto max-w-3xl px-5 pb-14 pt-8 text-center sm:pt-12 lg:pb-24 lg:pt-16">
+      <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur">
         <span className="relative flex h-1.5 w-1.5">
           <span
             className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
-            style={{ background: "var(--coral)" }}
+            style={{ background: "var(--azure)" }}
           />
           <span
             className="relative inline-flex h-1.5 w-1.5 rounded-full"
-            style={{ background: "var(--coral)" }}
+            style={{ background: "var(--azure)" }}
           />
         </span>
         Now live in Jaipur
       </span>
-      <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+      <h1 className="mt-5 font-display text-[40px] font-bold leading-[1.02] tracking-[-0.035em] text-foreground sm:text-6xl lg:text-7xl">
         See what's{" "}
         <span
           className="bg-clip-text text-transparent"
@@ -151,16 +151,15 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           happening in Jaipur tonight
         </span>
       </h1>
-      <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-        2,400+ people are already on Orbies right now — discovering events,
-        trips, communities and meetups around them. Log in to see what's
-        happening near you.
+      <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-lg">
+        2,400+ people are already on Orbies — discovering events, trips,
+        communities and meetups around them.
       </p>
 
-      <div className="mt-10 flex flex-col items-center gap-3">
+      <div className="mt-8 flex flex-col items-center gap-3">
         <button
           onClick={onOpen}
-          className="group inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold text-primary-foreground transition hover:brightness-105"
+          className="group inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-[15px] font-semibold text-primary-foreground transition active:scale-[0.98] hover:brightness-105 sm:w-auto sm:rounded-full sm:px-7 sm:py-4 sm:text-base"
           style={{
             background: "var(--gradient-warm)",
             boxShadow: "var(--shadow-glow)",
@@ -169,16 +168,16 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           Log in to explore
           <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
         </button>
-        <p className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+        <p className="inline-flex items-center gap-2 text-[12px] text-muted-foreground sm:text-sm">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
           128 people logged in over the last hour
         </p>
       </div>
 
-      <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[13px] text-muted-foreground sm:text-sm">
         <Stat label="Events" />
         <Dot />
         <Stat label="Communities" />
@@ -440,25 +439,25 @@ function Field({
 
 function Categories() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16 lg:py-24">
+    <section className="mx-auto max-w-6xl px-5 py-14 lg:py-24">
       <div className="max-w-2xl">
-        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
           One place
         </span>
-        <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h2 className="mt-3 font-display text-[30px] font-bold leading-[1.05] tracking-[-0.03em] sm:text-5xl">
           Everything happening in your city.
         </h2>
-        <p className="mt-4 text-lg text-muted-foreground">
+        <p className="mt-3 text-[15px] text-muted-foreground sm:text-lg">
           Stop scrolling through ten WhatsApp groups, three Instagram pages and
           a Telegram channel. Orbies brings the whole city into one feed.
         </p>
       </div>
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-9 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
         {CATEGORIES.map(({ icon: Icon, title, desc }, i) => (
           <article
             key={title}
-            className="group relative overflow-hidden rounded-3xl border border-border bg-card p-7 transition hover:-translate-y-1"
+            className="group relative overflow-hidden rounded-3xl border border-border bg-card/90 p-5 backdrop-blur transition active:scale-[0.99] hover:-translate-y-1 sm:p-7"
             style={{ boxShadow: "var(--shadow-soft)" }}
           >
             <div
@@ -467,18 +466,18 @@ function Categories() {
               style={{ background: "var(--gradient-warm)" }}
             />
             <div
-              className="relative grid h-12 w-12 place-items-center rounded-2xl text-primary-foreground"
+              className="relative grid h-11 w-11 place-items-center rounded-2xl text-primary-foreground sm:h-12 sm:w-12"
               style={{ background: "var(--gradient-warm)" }}
             >
               <Icon className="h-5 w-5" />
             </div>
-            <h3 className="relative mt-5 font-display text-2xl font-semibold tracking-tight">
+            <h3 className="relative mt-4 font-display text-[20px] font-semibold tracking-[-0.02em] sm:mt-5 sm:text-2xl">
               {title}
             </h3>
-            <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">
+            <p className="relative mt-1.5 text-[14px] leading-relaxed text-muted-foreground sm:text-sm">
               {desc}
             </p>
-            <span className="relative mt-6 inline-block text-xs font-medium text-foreground/50">
+            <span className="relative mt-5 inline-block text-[11px] font-medium text-foreground/40 sm:mt-6 sm:text-xs">
               0{i + 1}
             </span>
           </article>
@@ -504,25 +503,25 @@ function Why() {
     },
   ];
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-24">
+    <section className="mx-auto max-w-6xl px-5 pb-20">
       <div
-        className="rounded-3xl border border-border p-8 sm:p-12"
+        className="rounded-3xl border border-border p-6 sm:p-12"
         style={{
           background:
-            "linear-gradient(180deg, oklch(0.97 0.02 75) 0%, oklch(0.94 0.04 65) 100%)",
+            "linear-gradient(180deg, oklch(0.99 0.005 250) 0%, oklch(0.96 0.02 250) 100%)",
           boxShadow: "var(--shadow-soft)",
         }}
       >
-        <h2 className="max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+        <h2 className="max-w-2xl font-display text-[26px] font-bold tracking-[-0.03em] sm:text-4xl">
           The city is alive — you just can't see it yet.
         </h2>
-        <div className="mt-10 grid gap-8 sm:grid-cols-3">
+        <div className="mt-7 grid gap-6 sm:mt-10 sm:grid-cols-3 sm:gap-8">
           {items.map((it) => (
             <div key={it.k}>
-              <div className="font-display text-sm font-semibold uppercase tracking-wider text-primary">
+              <div className="font-display text-[12px] font-semibold uppercase tracking-wider text-primary">
                 {it.k}
               </div>
-              <p className="mt-2 text-foreground/80">{it.v}</p>
+              <p className="mt-2 text-[14px] text-foreground/80 sm:text-base">{it.v}</p>
             </div>
           ))}
         </div>
@@ -533,8 +532,8 @@ function Why() {
 
 function Footer() {
   return (
-    <footer className="mx-auto max-w-6xl border-t border-border px-6 py-8">
-      <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
+    <footer className="mx-auto max-w-6xl border-t border-border px-5 py-7">
+      <div className="flex flex-wrap items-center justify-between gap-3 text-[12px] text-muted-foreground sm:text-sm">
         <span>© {new Date().getFullYear()} Orbies</span>
         <span>Made with care in Jaipur.</span>
       </div>
