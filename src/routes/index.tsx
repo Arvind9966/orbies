@@ -153,7 +153,7 @@ function DesktopVideo() {
     videoRef.current?.play().catch(() => {});
   }, []);
   return (
-    <div className="hidden md:block w-full">
+    <div className="hidden md:block w-full md:-mt-4">
       <video
         ref={videoRef}
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
@@ -174,7 +174,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
       <VideoBackground />
       <Nav onOpen={onOpen} />
       <section
-        className="relative z-10 flex flex-col items-start justify-start px-6 pb-16 pt-6 text-left sm:pt-10 md:items-center md:text-center md:pt-2 md:pb-4"
+        className="relative z-10 flex flex-col items-start justify-start px-6 pb-16 pt-6 text-left sm:pt-10 md:items-center md:text-center md:pt-2 md:pb-0"
       >
         <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur md:self-center">
           <span className="relative flex h-1.5 w-1.5">
@@ -216,7 +216,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         </p>
         <button
           onClick={onOpen}
-          className="animate-fade-rise-delay-2 mt-12 rounded-full bg-black px-14 py-5 text-base text-white transition-transform hover:scale-[1.03] md:self-center md:mt-4 md:py-3.5"
+          className="animate-fade-rise-delay-2 mt-12 rounded-full bg-black px-14 py-5 text-base text-white transition-transform hover:scale-[1.03] md:self-center md:mt-3 md:py-3"
         >
           Log in to explore
         </button>
