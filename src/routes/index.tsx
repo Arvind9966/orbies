@@ -119,8 +119,11 @@ function Hero() {
     <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-16 pt-8 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-24 lg:pt-12">
       <div>
         <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
-          <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--coral)" }} />
-          Early access — Jaipur
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: "var(--coral)" }} />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "var(--coral)" }} />
+          </span>
+          Now live in Jaipur
         </span>
         <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
           Discover what's{" "}
@@ -181,7 +184,7 @@ function WaitlistCard() {
       return;
     }
     setDone(true);
-    toast.success("You're on the list! We'll be in touch soon.");
+    toast.success("You will be informed soon.");
   }
 
   if (done) {
@@ -196,10 +199,9 @@ function WaitlistCard() {
         >
           <CheckCircle2 className="h-7 w-7" />
         </div>
-        <h3 className="mt-5 font-display text-2xl font-semibold">You're in.</h3>
+        <h3 className="mt-5 font-display text-2xl font-semibold">You will be informed soon.</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          We'll reach out as soon as Orbies opens up in your city. Tell a friend
-          who'd love this too.
+          We are matching {interest ? interest.toLowerCase() : "things"} near you in Jaipur. You will hear from us the moment something relevant pops up.
         </p>
       </div>
     );
@@ -217,10 +219,10 @@ function WaitlistCard() {
         style={{ background: "var(--gradient-warm)" }}
       />
       <h2 className="font-display text-2xl font-semibold tracking-tight">
-        Join early access
+        Discover around you
       </h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Be first to explore Orbies in Jaipur.
+        Tell us what you are into and we will ping you when it pops up nearby.
       </p>
 
       <div className="mt-6 space-y-4">
@@ -284,11 +286,11 @@ function WaitlistCard() {
           boxShadow: "var(--shadow-glow)",
         }}
       >
-        {loading ? "Joining…" : "Join the waitlist"}
+        {loading ? "Finding…" : "Notify me"}
         <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
       </button>
       <p className="mt-3 text-center text-xs text-muted-foreground">
-        No spam. We'll only message you when Orbies is ready.
+        No spam. You will be informed soon when something relevant shows up.
       </p>
 
       <style>{`
