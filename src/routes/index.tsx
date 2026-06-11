@@ -173,7 +173,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           style={{
             fontFamily: '"Poppins", ui-sans-serif, system-ui, sans-serif',
             fontWeight: 900,
-            fontSize: "clamp(3.5rem, 13vw, 9rem)",
+            fontSize: "clamp(3rem, 10vw, 7rem)",
             lineHeight: 0.95,
             letterSpacing: "-0.04em",
             maxWidth: "80rem",
