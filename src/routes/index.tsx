@@ -168,8 +168,8 @@ function VideoBackground() {
 
   return (
     <div
-      className="pointer-events-none absolute z-0"
-      style={{ top: "300px", inset: "auto 0 0 0" }}
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-0"
+      style={{ height: "55%" }}
     >
       <video
         ref={videoRef}
@@ -180,7 +180,7 @@ function VideoBackground() {
         className="h-full w-full object-cover"
         style={{ opacity: 0, transition: "opacity 80ms linear" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/40" />
     </div>
   );
 }
@@ -191,8 +191,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
       <VideoBackground />
       <Nav onOpen={onOpen} />
       <section
-        className="relative z-10 flex flex-col items-center justify-center px-6 pb-40 text-center"
-        style={{ paddingTop: "calc(8rem - 75px)" }}
+        className="relative z-10 flex flex-col items-center justify-start px-6 pb-16 pt-6 text-center sm:pt-10"
       >
         <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur">
           <span className="relative flex h-1.5 w-1.5">
