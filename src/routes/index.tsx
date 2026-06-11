@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import {
   Calendar,
@@ -106,95 +106,138 @@ function Index() {
   );
 }
 
-function Nav() {
+function Nav({ onOpen }: { onOpen: () => void }) {
+  const items = [
+    { label: "Home", active: true },
+    { label: "Studio" },
+    { label: "About" },
+    { label: "Journal" },
+    { label: "Reach Us" },
+  ];
   return (
-    <header className="sticky top-0 z-30 mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5 backdrop-blur-xl bg-background/70 border-b border-border/60">
-      <a href="#" className="flex items-center gap-2">
-        <span
-          className="grid h-8 w-8 place-items-center rounded-2xl text-primary-foreground"
-          style={{ background: "var(--gradient-warm)", boxShadow: "var(--shadow-glow)" }}
-        >
-          <span className="font-display text-sm font-bold">O</span>
-        </span>
-        <span className="font-display text-[17px] font-semibold tracking-tight">Orbies</span>
+    <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 sm:py-6">
+      <a href="#" className="font-serif-display text-2xl tracking-tight text-black sm:text-3xl">
+        Aethera<sup className="text-xs">®</sup>
       </a>
-      <div className="flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
-        <MapPin className="h-3 w-3" />
-        <span>Jaipur</span>
+      <div className="hidden items-center gap-7 md:flex">
+        {items.map((it) => (
+          <a
+            key={it.label}
+            href="#"
+            className="text-sm transition-colors hover:opacity-70"
+            style={{ color: it.active ? "#000000" : "#6F6F6F" }}
+          >
+            {it.label}
+          </a>
+        ))}
       </div>
-    </header>
+      <button
+        onClick={onOpen}
+        className="rounded-full bg-black px-5 py-2 text-xs font-medium text-white transition-transform hover:scale-[1.03] sm:px-6 sm:py-2.5 sm:text-sm"
+      >
+        Begin Journey
+      </button>
+    </nav>
+  );
+}
+
+function VideoBackground() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const FADE = 0.5;
+
+    const tick = () => {
+      if (!video.duration || isNaN(video.duration)) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+      const t = video.currentTime;
+      const d = video.duration;
+      let opacity = 1;
+      if (t < FADE) opacity = t / FADE;
+      else if (t > d - FADE) opacity = Math.max(0, (d - t) / FADE);
+      video.style.opacity = String(opacity);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    const onEnded = () => {
+      video.style.opacity = "0";
+      setTimeout(() => {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }, 100);
+    };
+
+    video.play().catch(() => {});
+    rafRef.current = requestAnimationFrame(tick);
+    video.addEventListener("ended", onEnded);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      video.removeEventListener("ended", onEnded);
+    };
+  }, []);
+
+  return (
+    <div
+      className="pointer-events-none absolute z-0"
+      style={{ top: "300px", inset: "auto 0 0 0" }}
+    >
+      <video
+        ref={videoRef}
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
+        muted
+        playsInline
+        autoPlay
+        className="h-full w-full object-cover"
+        style={{ opacity: 0, transition: "opacity 80ms linear" }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+    </div>
   );
 }
 
 function Hero({ onOpen }: { onOpen: () => void }) {
   return (
-    <section className="mx-auto max-w-3xl px-5 pb-14 pt-8 text-center sm:pt-12 lg:pb-24 lg:pt-16">
-      <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur">
-        <span className="relative flex h-1.5 w-1.5">
-          <span
-            className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
-            style={{ background: "var(--azure)" }}
-          />
-          <span
-            className="relative inline-flex h-1.5 w-1.5 rounded-full"
-            style={{ background: "var(--azure)" }}
-          />
-        </span>
-        Now live in Jaipur
-      </span>
-      <h1 className="mt-5 font-display text-[40px] font-bold leading-[1.02] tracking-[-0.035em] text-foreground sm:text-6xl lg:text-7xl">
-        See what's{" "}
-        <span
-          className="bg-clip-text text-transparent"
-          style={{ backgroundImage: "var(--gradient-warm)" }}
-        >
-          happening in Jaipur tonight
-        </span>
-      </h1>
-      <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-lg">
-        2,400+ people are already on Orbies — discovering events, trips,
-        communities and meetups around them.
-      </p>
-
-      <div className="mt-8 flex flex-col items-center gap-3">
-        <button
-          onClick={onOpen}
-          className="group inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-[15px] font-semibold text-primary-foreground transition active:scale-[0.98] hover:brightness-105 sm:w-auto sm:rounded-full sm:px-7 sm:py-4 sm:text-base"
+    <div className="relative min-h-screen w-full overflow-hidden bg-white">
+      <VideoBackground />
+      <Nav onOpen={onOpen} />
+      <section
+        className="relative z-10 flex flex-col items-center justify-center px-6 pb-40 text-center"
+        style={{ paddingTop: "calc(8rem - 75px)" }}
+      >
+        <h1
+          className="animate-fade-rise font-serif-display font-normal text-black"
           style={{
-            background: "var(--gradient-warm)",
-            boxShadow: "var(--shadow-glow)",
+            fontSize: "clamp(2.75rem, 9vw, 8rem)",
+            lineHeight: 0.95,
+            letterSpacing: "-2.46px",
+            maxWidth: "80rem",
           }}
         >
-          Log in to explore
-          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-        </button>
-        <p className="inline-flex items-center gap-2 text-[12px] text-muted-foreground sm:text-sm">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-          </span>
-          128 people logged in over the last hour
+          Beyond <em style={{ color: "#6F6F6F" }}>silence,</em> we build{" "}
+          <em style={{ color: "#6F6F6F" }}>the eternal.</em>
+        </h1>
+        <p
+          className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed sm:text-lg"
+          style={{ color: "#6F6F6F" }}
+        >
+          Building platforms for brilliant minds, fearless makers, and
+          thoughtful souls. Through the noise, we craft digital havens for deep
+          work and pure flows.
         </p>
-      </div>
-
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[13px] text-muted-foreground sm:text-sm">
-        <Stat label="Events" />
-        <Dot />
-        <Stat label="Communities" />
-        <Dot />
-        <Stat label="Trips" />
-        <Dot />
-        <Stat label="Volunteering" />
-      </div>
-    </section>
+        <button
+          onClick={onOpen}
+          className="animate-fade-rise-delay-2 mt-12 rounded-full bg-black px-14 py-5 text-base text-white transition-transform hover:scale-[1.03]"
+        >
+          Begin Journey
+        </button>
+      </section>
+    </div>
   );
-}
-
-function Stat({ label }: { label: string }) {
-  return <span className="font-medium text-foreground/80">{label}</span>;
-}
-function Dot() {
-  return <span className="h-1 w-1 rounded-full bg-foreground/30" />;
 }
 
 function WaitlistDialog({
