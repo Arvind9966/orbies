@@ -1,4 +1,4 @@
-import { Children, ReactNode } from 'react';
+import { Children, ReactNode, type CSSProperties } from 'react';
 import './ScrollStack.css';
 
 export const ScrollStackItem = ({
@@ -50,11 +50,8 @@ const ScrollStack = ({
       style={
         {
           '--stack-top': stackPosition,
-          '--stack-gap': `${itemStackDistance}px`,
           '--stack-distance': `${itemDistance}px`,
-          '--stack-base-scale': baseScale,
-          '--stack-item-scale': itemScale,
-        } as React.CSSProperties
+        } as CSSProperties
       }
     >
       <div className="scroll-stack-inner">
@@ -62,7 +59,12 @@ const ScrollStack = ({
           <div
             className="scroll-stack-card-wrapper"
             key={index}
-            style={{ '--stack-index': index } as React.CSSProperties}
+            style={
+              {
+                '--stack-offset': `${index * itemStackDistance}px`,
+                '--stack-scale': baseScale + index * itemScale,
+              } as CSSProperties
+            }
           >
             {child}
           </div>
