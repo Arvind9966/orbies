@@ -568,7 +568,7 @@ function Why() {
     },
   ];
   return (
-    <section className="mx-auto max-w-6xl px-5 pb-16 pt-2">
+    <section className="mx-auto max-w-6xl px-5 py-12 lg:py-20">
       <div
         className="rounded-3xl border border-border p-6 sm:p-12"
         style={{
