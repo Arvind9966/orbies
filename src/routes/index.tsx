@@ -128,42 +128,11 @@ function Nav({ onOpen }: { onOpen: () => void }) {
 
 function VideoBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const FADE = 0.5;
-
-    const tick = () => {
-      if (!video.duration || isNaN(video.duration)) {
-        rafRef.current = requestAnimationFrame(tick);
-        return;
-      }
-      const t = video.currentTime;
-      const d = video.duration;
-      let opacity = 1;
-      if (t < FADE) opacity = t / FADE;
-      else if (t > d - FADE) opacity = Math.max(0, (d - t) / FADE);
-      video.style.opacity = String(opacity);
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    const onEnded = () => {
-      video.style.opacity = "0";
-      setTimeout(() => {
-        video.currentTime = 0;
-        video.play().catch(() => {});
-      }, 100);
-    };
-
     video.play().catch(() => {});
-    rafRef.current = requestAnimationFrame(tick);
-    video.addEventListener("ended", onEnded);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      video.removeEventListener("ended", onEnded);
-    };
   }, []);
 
   return (
@@ -174,8 +143,9 @@ function VideoBackground() {
         muted
         playsInline
         autoPlay
+        loop
+        preload="auto"
         className="w-full max-w-3xl object-contain"
-        style={{ opacity: 0, transition: "opacity 80ms linear" }}
       />
     </div>
   );
