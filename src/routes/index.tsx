@@ -235,7 +235,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           onClick={onOpen}
           className="animate-fade-rise-delay-2 mt-12 rounded-full bg-black px-14 py-5 text-base text-white transition-transform hover:scale-[1.03]"
         >
-          Begin Journey
+          Log in to explore
         </button>
       </section>
     </div>
