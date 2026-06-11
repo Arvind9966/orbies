@@ -260,9 +260,9 @@ function WaitlistDialog({
         {step === 1 && (
           <>
             <DialogHeader>
-              <DialogTitle className="font-display text-2xl">Let's get you in</DialogTitle>
+              <DialogTitle className="font-display text-2xl">Log in to Orbies</DialogTitle>
               <DialogDescription>
-                Just a few quick details so we can ping you when something pops up nearby.
+                Quick login so we can show you what's happening near you tonight.
               </DialogDescription>
             </DialogHeader>
             <div className="mt-2 space-y-4">
