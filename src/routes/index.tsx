@@ -187,11 +187,11 @@ function DesktopVideo() {
 
 function Hero({ onOpen }: { onOpen: () => void }) {
   return (
-    <div className="relative min-h-[78svh] w-full overflow-hidden bg-white md:min-h-0">
+    <div className="relative min-h-screen w-full overflow-hidden bg-white md:min-h-0">
       <VideoBackground />
       <Nav onOpen={onOpen} />
       <section
-        className="relative z-10 flex flex-col items-start justify-start px-6 pt-8 pb-6 text-left sm:py-10 md:items-center md:text-center md:py-12"
+        className="relative z-10 flex flex-col items-start justify-start px-6 py-12 text-left sm:py-16 md:items-center md:text-center md:py-20"
       >
         <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur md:self-center">
           <span className="relative flex h-1.5 w-1.5">
@@ -485,7 +485,7 @@ function Field({
 
 function Categories() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-8 lg:py-12">
+    <section className="mx-auto max-w-6xl px-5 py-12 lg:py-20">
       <div className="max-w-2xl">
         <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
           One place
@@ -499,14 +499,14 @@ function Categories() {
         </p>
       </div>
 
-      <div className="mt-6 sm:mt-8">
+      <div className="mt-9 sm:mt-12">
         <ScrollStack
           useWindowScroll
-          itemDistance={42}
-          itemStackDistance={18}
+          itemDistance={60}
+          itemStackDistance={24}
           baseScale={0.88}
-          stackPosition="18%"
-          scaleEndPosition="10%"
+          stackPosition="22%"
+          scaleEndPosition="12%"
         >
           {CATEGORIES.map(({ icon: Icon, title, tagline, desc, bg, fg }, i) => (
             <ScrollStackItem
@@ -568,7 +568,7 @@ function Why() {
     },
   ];
   return (
-    <section className="mx-auto max-w-6xl px-5 py-8 lg:py-12">
+    <section className="mx-auto max-w-6xl px-5 py-12 lg:py-20">
       <div
         className="rounded-3xl border border-border p-6 sm:p-12"
         style={{
