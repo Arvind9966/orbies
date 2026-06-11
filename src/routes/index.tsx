@@ -107,35 +107,20 @@ function Index() {
 }
 
 function Nav({ onOpen }: { onOpen: () => void }) {
-  const items = [
-    { label: "Home", active: true },
-    { label: "Studio" },
-    { label: "About" },
-    { label: "Journal" },
-    { label: "Reach Us" },
-  ];
   return (
     <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 sm:py-6">
       <a href="#" className="font-serif-display text-2xl tracking-tight text-black sm:text-3xl">
-        Aethera<sup className="text-xs">®</sup>
+        Orbies
       </a>
-      <div className="hidden items-center gap-7 md:flex">
-        {items.map((it) => (
-          <a
-            key={it.label}
-            href="#"
-            className="text-sm transition-colors hover:opacity-70"
-            style={{ color: it.active ? "#000000" : "#6F6F6F" }}
-          >
-            {it.label}
-          </a>
-        ))}
+      <div className="flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+        <MapPin className="h-3 w-3" />
+        <span>Jaipur</span>
       </div>
       <button
         onClick={onOpen}
         className="rounded-full bg-black px-5 py-2 text-xs font-medium text-white transition-transform hover:scale-[1.03] sm:px-6 sm:py-2.5 sm:text-sm"
       >
-        Begin Journey
+        Log in to explore
       </button>
     </nav>
   );
