@@ -191,7 +191,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
       <VideoBackground />
       <Nav onOpen={onOpen} />
       <section
-        className="relative z-10 flex flex-col items-start justify-start px-6 pb-16 pt-6 text-left sm:pt-10 md:items-center md:text-center md:pt-2 md:pb-0"
+        className="relative z-10 flex flex-col items-start justify-start px-6 py-12 text-left sm:py-16 md:items-center md:text-center md:py-20"
       >
         <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur md:self-center">
           <span className="relative flex h-1.5 w-1.5">
@@ -485,7 +485,7 @@ function Field({
 
 function Categories() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-6 lg:py-12">
+    <section className="mx-auto max-w-6xl px-5 py-12 lg:py-20">
       <div className="max-w-2xl">
         <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
           One place
@@ -568,7 +568,7 @@ function Why() {
     },
   ];
   return (
-    <section className="mx-auto max-w-6xl px-5 pb-16 pt-2">
+    <section className="mx-auto max-w-6xl px-5 py-12 lg:py-20">
       <div
         className="rounded-3xl border border-border p-6 sm:p-12"
         style={{
