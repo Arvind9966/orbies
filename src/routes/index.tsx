@@ -153,7 +153,7 @@ function DesktopVideo() {
     videoRef.current?.play().catch(() => {});
   }, []);
   return (
-    <div className="hidden md:block w-full px-6 pb-16">
+    <div className="hidden md:block w-full">
       <video
         ref={videoRef}
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
@@ -162,7 +162,7 @@ function DesktopVideo() {
         autoPlay
         loop
         preload="auto"
-        className="w-full h-auto rounded-2xl object-cover"
+        className="w-full h-auto object-cover"
       />
     </div>
   );
