@@ -241,17 +241,22 @@ function WaitlistDialog({
       return;
     }
     setLoading(true);
-    const { error } = await supabase.from("waitlist_signups").insert({
+    const payload = {
       name: name.trim(),
       mobile: mobile.trim(),
       city: city.trim(),
       interest,
-    });
+    };
+    const { error } = await supabase.from("waitlist_signups").insert(payload);
     setLoading(false);
     if (error) {
       toast.error("Something went wrong. Please try again.");
       return;
     }
+    // Fire-and-forget mirror to Google Sheet — never block the user.
+    appendSignupToSheet({ data: payload }).catch((e) =>
+      console.error("Sheet append failed:", e),
+    );
     setStep(3);
   }
 
