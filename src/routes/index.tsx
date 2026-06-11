@@ -132,7 +132,7 @@ function VideoBackground() {
   }, []);
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex justify-center">
+    <div className="pointer-events-none absolute inset-0 z-0 flex items-end justify-center md:items-stretch">
       <video
         ref={videoRef}
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
@@ -141,7 +141,7 @@ function VideoBackground() {
         autoPlay
         loop
         preload="auto"
-        className="w-full max-w-3xl object-contain"
+        className="w-full max-w-3xl object-contain md:max-w-none md:h-full md:w-full md:object-cover"
       />
     </div>
   );
