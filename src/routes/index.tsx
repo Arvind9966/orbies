@@ -314,10 +314,10 @@ function WaitlistDialog({
           <>
             <DialogHeader>
               <DialogTitle className="font-display text-2xl">
-                What are you looking for on Orbies?
+                What do you want to see first?
               </DialogTitle>
               <DialogDescription>
-                Pick one — we'll start there. You can explore the rest later.
+                Pick one — we'll open your feed with this on top.
               </DialogDescription>
             </DialogHeader>
             <div className="mt-3 flex flex-wrap gap-2">
