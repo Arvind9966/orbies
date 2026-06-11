@@ -107,35 +107,20 @@ function Index() {
 }
 
 function Nav({ onOpen }: { onOpen: () => void }) {
-  const items = [
-    { label: "Home", active: true },
-    { label: "Studio" },
-    { label: "About" },
-    { label: "Journal" },
-    { label: "Reach Us" },
-  ];
   return (
     <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 sm:py-6">
       <a href="#" className="font-serif-display text-2xl tracking-tight text-black sm:text-3xl">
-        Aethera<sup className="text-xs">®</sup>
+        Orbies
       </a>
-      <div className="hidden items-center gap-7 md:flex">
-        {items.map((it) => (
-          <a
-            key={it.label}
-            href="#"
-            className="text-sm transition-colors hover:opacity-70"
-            style={{ color: it.active ? "#000000" : "#6F6F6F" }}
-          >
-            {it.label}
-          </a>
-        ))}
+      <div className="flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+        <MapPin className="h-3 w-3" />
+        <span>Jaipur</span>
       </div>
       <button
         onClick={onOpen}
         className="rounded-full bg-black px-5 py-2 text-xs font-medium text-white transition-transform hover:scale-[1.03] sm:px-6 sm:py-2.5 sm:text-sm"
       >
-        Begin Journey
+        Log in to explore
       </button>
     </nav>
   );
@@ -209,6 +194,19 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         className="relative z-10 flex flex-col items-center justify-center px-6 pb-40 text-center"
         style={{ paddingTop: "calc(8rem - 75px)" }}
       >
+        <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur">
+          <span className="relative flex h-1.5 w-1.5">
+            <span
+              className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
+              style={{ background: "var(--azure)" }}
+            />
+            <span
+              className="relative inline-flex h-1.5 w-1.5 rounded-full"
+              style={{ background: "var(--azure)" }}
+            />
+          </span>
+          Now live in Jaipur
+        </span>
         <h1
           className="animate-fade-rise font-serif-display font-normal text-black"
           style={{
@@ -218,22 +216,26 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             maxWidth: "80rem",
           }}
         >
-          Beyond <em style={{ color: "#6F6F6F" }}>silence,</em> we build{" "}
-          <em style={{ color: "#6F6F6F" }}>the eternal.</em>
+          See what's{" "}
+          <span
+            className="bg-clip-text text-transparent"
+            style={{ backgroundImage: "var(--gradient-warm)" }}
+          >
+            happening in Jaipur tonight
+          </span>
         </h1>
         <p
           className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed sm:text-lg"
           style={{ color: "#6F6F6F" }}
         >
-          Building platforms for brilliant minds, fearless makers, and
-          thoughtful souls. Through the noise, we craft digital havens for deep
-          work and pure flows.
+          2,400+ people are already on Orbies — discovering events, trips,
+          communities and meetups around them. Log in to see what's happening near you.
         </p>
         <button
           onClick={onOpen}
           className="animate-fade-rise-delay-2 mt-12 rounded-full bg-black px-14 py-5 text-base text-white transition-transform hover:scale-[1.03]"
         >
-          Begin Journey
+          Log in to explore
         </button>
       </section>
     </div>
