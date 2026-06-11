@@ -110,8 +110,8 @@ function Index() {
 function Nav({ onOpen }: { onOpen: () => void }) {
   return (
     <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8 sm:py-6">
-      <a href="#" className="font-serif-display text-2xl tracking-tight text-black sm:text-3xl">
-        Orbies
+      <a href="#" className="flex items-center">
+        <img src={orbiesLogo.url} alt="Orbies" className="h-8 w-auto sm:h-10" />
       </a>
       <button
         onClick={onOpen}
