@@ -184,7 +184,7 @@ function WaitlistCard() {
       return;
     }
     setDone(true);
-    toast.success("You're on the list! We'll be in touch soon.");
+    toast.success("You will be informed soon.");
   }
 
   if (done) {
