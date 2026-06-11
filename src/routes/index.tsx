@@ -169,11 +169,13 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           Now live in Jaipur
         </span>
         <h1
-          className="animate-fade-rise mt-5 font-serif-display font-normal text-black text-balance"
+          className="animate-fade-rise mt-5 text-black text-balance"
           style={{
-            fontSize: "clamp(2rem, 8vw, 7rem)",
-            lineHeight: 1.02,
-            letterSpacing: "-0.02em",
+            fontFamily: '"Poppins", ui-sans-serif, system-ui, sans-serif',
+            fontWeight: 900,
+            fontSize: "clamp(3.5rem, 13vw, 9rem)",
+            lineHeight: 0.95,
+            letterSpacing: "-0.04em",
             maxWidth: "80rem",
           }}
         >
