@@ -142,18 +142,18 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         Now live in Jaipur
       </span>
       <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-        Discover what's{" "}
+        See what's{" "}
         <span
           className="bg-clip-text text-transparent"
           style={{ backgroundImage: "var(--gradient-warm)" }}
         >
-          happening around you
+          happening in Jaipur tonight
         </span>
       </h1>
       <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-        Find communities, events, trips, volunteering opportunities and
-        like-minded people — all in one place. No more digging through ten
-        WhatsApp groups.
+        2,400+ people are already on Orbies right now — discovering events,
+        trips, communities and meetups around them. Log in to see what's
+        happening near you.
       </p>
 
       <div className="mt-10 flex flex-col items-center gap-3">
@@ -165,11 +165,15 @@ function Hero({ onOpen }: { onOpen: () => void }) {
             boxShadow: "var(--shadow-glow)",
           }}
         >
-          Get early access
+          Log in to explore
           <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
         </button>
-        <p className="text-sm text-muted-foreground">
-          Takes 20 seconds — be the first to know when something cool drops in your city.
+        <p className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+          </span>
+          128 people logged in over the last hour
         </p>
       </div>
 
