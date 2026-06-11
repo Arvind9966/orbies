@@ -168,8 +168,8 @@ function VideoBackground() {
 
   return (
     <div
-      className="pointer-events-none absolute z-0"
-      style={{ top: "300px", inset: "auto 0 0 0" }}
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-0"
+      style={{ height: "55%" }}
     >
       <video
         ref={videoRef}
@@ -180,7 +180,7 @@ function VideoBackground() {
         className="h-full w-full object-cover"
         style={{ opacity: 0, transition: "opacity 80ms linear" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/40" />
     </div>
   );
 }
