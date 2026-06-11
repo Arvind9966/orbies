@@ -199,10 +199,9 @@ function WaitlistCard() {
         >
           <CheckCircle2 className="h-7 w-7" />
         </div>
-        <h3 className="mt-5 font-display text-2xl font-semibold">You're in.</h3>
+        <h3 className="mt-5 font-display text-2xl font-semibold">You will be informed soon.</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          We'll reach out as soon as Orbies opens up in your city. Tell a friend
-          who'd love this too.
+          We are matching {interest ? interest.toLowerCase() : "things"} near you in Jaipur. You will hear from us the moment something relevant pops up.
         </p>
       </div>
     );
