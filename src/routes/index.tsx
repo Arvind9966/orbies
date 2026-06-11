@@ -96,7 +96,7 @@ function Index() {
   return (
     <div className="min-h-screen">
       <Toaster richColors position="top-center" />
-      <Nav />
+      
       <Hero onOpen={() => setOpen(true)} />
       <Categories />
       <Why />
