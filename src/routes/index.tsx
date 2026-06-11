@@ -14,6 +14,13 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,13 +53,13 @@ const INTERESTS = [
   "Sports & Fitness",
 ] as const;
 
-const signupSchema = z.object({
+const step1Schema = z.object({
   name: z.string().trim().min(1, "Tell us your name").max(100),
   mobile: z
     .string()
     .trim()
     .regex(/^[0-9+\-\s()]{7,20}$/, "Enter a valid mobile number"),
-  interest: z.enum(INTERESTS, { message: "Pick what you're looking for" }),
+  city: z.string().trim().min(1, "Which city are you in?").max(100),
 });
 
 const CATEGORIES = [
@@ -84,14 +91,16 @@ const CATEGORIES = [
 ];
 
 function Index() {
+  const [open, setOpen] = useState(false);
   return (
     <div className="min-h-screen">
       <Toaster richColors position="top-center" />
       <Nav />
-      <Hero />
+      <Hero onOpen={() => setOpen(true)} />
       <Categories />
       <Why />
       <Footer />
+      <WaitlistDialog open={open} onOpenChange={setOpen} />
     </div>
   );
 }
@@ -100,8 +109,10 @@ function Nav() {
   return (
     <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
       <a href="#" className="flex items-center gap-2">
-        <span className="grid h-9 w-9 place-items-center rounded-full text-primary-foreground"
-              style={{ background: "var(--gradient-warm)" }}>
+        <span
+          className="grid h-9 w-9 place-items-center rounded-full text-primary-foreground"
+          style={{ background: "var(--gradient-warm)" }}
+        >
           <span className="font-display text-lg font-bold">O</span>
         </span>
         <span className="font-display text-xl font-semibold tracking-tight">Orbies</span>
@@ -114,43 +125,63 @@ function Nav() {
   );
 }
 
-function Hero() {
+function Hero({ onOpen }: { onOpen: () => void }) {
   return (
-    <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-16 pt-8 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-24 lg:pt-12">
-      <div>
-        <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: "var(--coral)" }} />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "var(--coral)" }} />
-          </span>
-          Now live in Jaipur
-        </span>
-        <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-          Discover what's{" "}
+    <section className="mx-auto max-w-3xl px-6 pb-16 pt-10 text-center lg:pb-24 lg:pt-16">
+      <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
+        <span className="relative flex h-1.5 w-1.5">
           <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "var(--gradient-warm)" }}
-          >
-            happening around you
-          </span>
-        </h1>
-        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          Find communities, events, trips, volunteering opportunities and
-          like-minded people — all in one place. No more digging through ten
-          WhatsApp groups.
+            className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
+            style={{ background: "var(--coral)" }}
+          />
+          <span
+            className="relative inline-flex h-1.5 w-1.5 rounded-full"
+            style={{ background: "var(--coral)" }}
+          />
+        </span>
+        Now live in Jaipur
+      </span>
+      <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+        Discover what's{" "}
+        <span
+          className="bg-clip-text text-transparent"
+          style={{ backgroundImage: "var(--gradient-warm)" }}
+        >
+          happening around you
+        </span>
+      </h1>
+      <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+        Find communities, events, trips, volunteering opportunities and
+        like-minded people — all in one place. No more digging through ten
+        WhatsApp groups.
+      </p>
+
+      <div className="mt-10 flex flex-col items-center gap-3">
+        <button
+          onClick={onOpen}
+          className="group inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold text-primary-foreground transition hover:brightness-105"
+          style={{
+            background: "var(--gradient-warm)",
+            boxShadow: "var(--shadow-glow)",
+          }}
+        >
+          Get early access
+          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+        </button>
+        <p className="text-sm text-muted-foreground">
+          Takes 20 seconds — be the first to know when something cool drops in your city.
         </p>
-        <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
-          <Stat label="Events" />
-          <Dot />
-          <Stat label="Communities" />
-          <Dot />
-          <Stat label="Trips" />
-          <Dot />
-          <Stat label="Volunteering" />
-        </div>
       </div>
 
-      <WaitlistCard />
+      <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
+        <Stat label="Events" />
+        <Dot />
+        <Stat label="Communities" />
+        <Dot />
+        <Stat label="Trips" />
+        <Dot />
+        <Stat label="Volunteering" />
+      </div>
     </section>
   );
 }
@@ -162,156 +193,222 @@ function Dot() {
   return <span className="h-1 w-1 rounded-full bg-foreground/30" />;
 }
 
-function WaitlistCard() {
+function WaitlistDialog({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (v: boolean) => void;
+}) {
+  const [step, setStep] = useState<1 | 2 | 3>(1);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
+  const [city, setCity] = useState("");
   const [interest, setInterest] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const parsed = signupSchema.safeParse({ name, mobile, interest });
+  function reset() {
+    setStep(1);
+    setName("");
+    setMobile("");
+    setCity("");
+    setInterest("");
+    setLoading(false);
+  }
+
+  function handleOpenChange(v: boolean) {
+    onOpenChange(v);
+    if (!v) setTimeout(reset, 200);
+  }
+
+  function next() {
+    const parsed = step1Schema.safeParse({ name, mobile, city });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0]?.message ?? "Please check the form");
       return;
     }
+    setStep(2);
+  }
+
+  async function submit() {
+    if (!interest) {
+      toast.error("Pick what you're looking for");
+      return;
+    }
     setLoading(true);
-    const { error } = await supabase.from("waitlist_signups").insert(parsed.data);
+    const { error } = await supabase.from("waitlist_signups").insert({
+      name: name.trim(),
+      mobile: mobile.trim(),
+      city: city.trim(),
+      interest,
+    });
     setLoading(false);
     if (error) {
       toast.error("Something went wrong. Please try again.");
       return;
     }
-    setDone(true);
-    toast.success("You will be informed soon.");
-  }
-
-  if (done) {
-    return (
-      <div
-        className="relative rounded-3xl border border-border bg-card p-8 text-center"
-        style={{ boxShadow: "var(--shadow-soft)" }}
-      >
-        <div
-          className="mx-auto grid h-14 w-14 place-items-center rounded-full text-primary-foreground"
-          style={{ background: "var(--gradient-warm)" }}
-        >
-          <CheckCircle2 className="h-7 w-7" />
-        </div>
-        <h3 className="mt-5 font-display text-2xl font-semibold">You will be informed soon.</h3>
-        <p className="mt-2 text-sm text-muted-foreground">
-          We are matching {interest ? interest.toLowerCase() : "things"} near you in Jaipur. You will hear from us the moment something relevant pops up.
-        </p>
-      </div>
-    );
+    setStep(3);
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="relative rounded-3xl border border-border bg-card p-6 sm:p-8"
-      style={{ boxShadow: "var(--shadow-soft)" }}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-6 -right-6 h-24 w-24 rounded-full opacity-70 blur-2xl"
-        style={{ background: "var(--gradient-warm)" }}
-      />
-      <h2 className="font-display text-2xl font-semibold tracking-tight">
-        Discover around you
-      </h2>
-      <p className="mt-1 text-sm text-muted-foreground">
-        Tell us what you are into and we will ping you when it pops up nearby.
-      </p>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogContent className="sm:max-w-md">
+        {step === 1 && (
+          <>
+            <DialogHeader>
+              <DialogTitle className="font-display text-2xl">Let's get you in</DialogTitle>
+              <DialogDescription>
+                Just a few quick details so we can ping you when something pops up nearby.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="mt-2 space-y-4">
+              <Field label="Name">
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Aarav Sharma"
+                  maxLength={100}
+                  className="orb-input"
+                  autoFocus
+                />
+              </Field>
+              <Field label="Mobile number">
+                <input
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  placeholder="+91 98xxxxxx00"
+                  maxLength={20}
+                  inputMode="tel"
+                  className="orb-input"
+                />
+              </Field>
+              <Field label="City">
+                <input
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="Jaipur"
+                  maxLength={100}
+                  className="orb-input"
+                />
+              </Field>
+            </div>
+            <button
+              onClick={next}
+              className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold text-primary-foreground transition hover:brightness-105"
+              style={{
+                background: "var(--gradient-warm)",
+                boxShadow: "var(--shadow-glow)",
+              }}
+            >
+              Next
+              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+            </button>
+          </>
+        )}
 
-      <div className="mt-6 space-y-4">
-        <Field label="Name">
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Aarav Sharma"
-            maxLength={100}
-            className="input"
-          />
-        </Field>
-        <Field label="Mobile number">
-          <input
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
-            placeholder="+91 98xxxxxx00"
-            maxLength={20}
-            inputMode="tel"
-            className="input"
-          />
-        </Field>
-        <div>
-          <label className="text-sm font-medium text-foreground">
-            What are you looking for on Orbies?
-          </label>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {INTERESTS.map((opt) => {
-              const active = interest === opt;
-              return (
-                <button
-                  type="button"
-                  key={opt}
-                  onClick={() => setInterest(opt)}
-                  className={
-                    "rounded-full border px-3.5 py-1.5 text-sm transition " +
-                    (active
-                      ? "border-transparent text-primary-foreground"
-                      : "border-border bg-background text-foreground/80 hover:border-foreground/30")
-                  }
-                  style={
-                    active
-                      ? { background: "var(--gradient-warm)" }
-                      : undefined
-                  }
-                >
-                  {opt}
-                </button>
-              );
-            })}
+        {step === 2 && (
+          <>
+            <DialogHeader>
+              <DialogTitle className="font-display text-2xl">
+                What are you looking for on Orbies?
+              </DialogTitle>
+              <DialogDescription>
+                Pick one — we'll start there. You can explore the rest later.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {INTERESTS.map((opt) => {
+                const active = interest === opt;
+                return (
+                  <button
+                    type="button"
+                    key={opt}
+                    onClick={() => setInterest(opt)}
+                    className={
+                      "rounded-full border px-3.5 py-1.5 text-sm transition " +
+                      (active
+                        ? "border-transparent text-primary-foreground"
+                        : "border-border bg-background text-foreground/80 hover:border-foreground/30")
+                    }
+                    style={active ? { background: "var(--gradient-warm)" } : undefined}
+                  >
+                    {opt}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-6 flex items-center gap-3">
+              <button
+                onClick={() => setStep(1)}
+                className="rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground/80 transition hover:border-foreground/40"
+              >
+                Back
+              </button>
+              <button
+                onClick={submit}
+                disabled={loading}
+                className="group inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-105 disabled:opacity-70"
+                style={{
+                  background: "var(--gradient-warm)",
+                  boxShadow: "var(--shadow-glow)",
+                }}
+              >
+                {loading ? "Joining…" : "Join waitlist"}
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              </button>
+            </div>
+          </>
+        )}
+
+        {step === 3 && (
+          <div className="py-4 text-center">
+            <div
+              className="mx-auto grid h-14 w-14 place-items-center rounded-full text-primary-foreground"
+              style={{ background: "var(--gradient-warm)" }}
+            >
+              <CheckCircle2 className="h-7 w-7" />
+            </div>
+            <h3 className="mt-5 font-display text-2xl font-semibold">
+              Thanks for joining the waitlist!
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              You're in, {name.split(" ")[0] || "friend"}. We'll ping you the moment{" "}
+              {interest ? interest.toLowerCase() : "something good"} pops up in{" "}
+              {city || "your city"}.
+            </p>
+            <button
+              onClick={() => handleOpenChange(false)}
+              className="mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-105"
+              style={{
+                background: "var(--gradient-warm)",
+                boxShadow: "var(--shadow-glow)",
+              }}
+            >
+              Got it
+            </button>
           </div>
-        </div>
-      </div>
+        )}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold text-primary-foreground transition hover:brightness-105 disabled:opacity-70"
-        style={{
-          background: "var(--gradient-warm)",
-          boxShadow: "var(--shadow-glow)",
-        }}
-      >
-        {loading ? "Finding…" : "Notify me"}
-        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-      </button>
-      <p className="mt-3 text-center text-xs text-muted-foreground">
-        No spam. You will be informed soon when something relevant shows up.
-      </p>
-
-      <style>{`
-        .input {
-          width: 100%;
-          border-radius: 0.75rem;
-          background: var(--background);
-          border: 1px solid var(--input);
-          padding: 0.75rem 0.9rem;
-          font-size: 0.95rem;
-          color: var(--foreground);
-          outline: none;
-          transition: border-color .15s, box-shadow .15s;
-        }
-        .input:focus {
-          border-color: var(--ring);
-          box-shadow: 0 0 0 4px oklch(0.68 0.21 30 / 0.15);
-        }
-        .input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
-      `}</style>
-    </form>
+        <style>{`
+          .orb-input {
+            width: 100%;
+            border-radius: 0.75rem;
+            background: var(--background);
+            border: 1px solid var(--input);
+            padding: 0.75rem 0.9rem;
+            font-size: 0.95rem;
+            color: var(--foreground);
+            outline: none;
+            transition: border-color .15s, box-shadow .15s;
+          }
+          .orb-input:focus {
+            border-color: var(--ring);
+            box-shadow: 0 0 0 4px oklch(0.68 0.21 30 / 0.15);
+          }
+          .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
+        `}</style>
+      </DialogContent>
+    </Dialog>
   );
 }
 

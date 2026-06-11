@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       waitlist_signups: {
         Row: {
+          city: string
           created_at: string
           id: string
           interest: string
@@ -23,6 +24,7 @@ export type Database = {
           name: string
         }
         Insert: {
+          city?: string
           created_at?: string
           id?: string
           interest: string
@@ -30,6 +32,7 @@ export type Database = {
           name: string
         }
         Update: {
+          city?: string
           created_at?: string
           id?: string
           interest?: string
