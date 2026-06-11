@@ -119,8 +119,11 @@ function Hero() {
     <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-16 pt-8 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pb-24 lg:pt-12">
       <div>
         <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
-          <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--coral)" }} />
-          Early access — Jaipur
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: "var(--coral)" }} />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "var(--coral)" }} />
+          </span>
+          Now live in Jaipur
         </span>
         <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
           Discover what's{" "}
