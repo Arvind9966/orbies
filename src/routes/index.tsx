@@ -216,7 +216,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
         </p>
         <button
           onClick={onOpen}
-          className="animate-fade-rise-delay-2 mt-12 rounded-full bg-black px-14 py-5 text-base text-white transition-transform hover:scale-[1.03] md:self-center md:mt-10"
+          className="animate-fade-rise-delay-2 mt-12 rounded-full bg-black px-14 py-5 text-base text-white transition-transform hover:scale-[1.03] md:self-center md:mt-6 md:py-4"
         >
           Log in to explore
         </button>
