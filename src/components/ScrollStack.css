@@ -1,15 +1,10 @@
 .scroll-stack-scroller {
   position: relative;
   width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: visible;
-  overscroll-behavior: contain;
+  height: auto;
+  overflow: visible;
+  overscroll-behavior: auto;
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: scroll-position;
 }
 
 .scroll-stack-inner {
@@ -24,14 +19,16 @@
 }
 
 .scroll-stack-card-wrapper {
-  position: relative;
+  position: sticky;
+  top: calc(var(--stack-top, 20%) + var(--stack-offset, 0px));
+  margin-bottom: var(--stack-distance, 60px);
 }
 
 .scroll-stack-card {
   transform-origin: top center;
-  will-change: transform, filter;
+  will-change: transform;
   backface-visibility: hidden;
-  transform-style: preserve-3d;
+  transform: translateZ(0) scale(var(--stack-scale, 1));
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
   width: 100%;
   height: 22rem;
@@ -39,8 +36,6 @@
   padding: 1.75rem;
   border-radius: 24px;
   box-sizing: border-box;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
   position: relative;
   overflow: hidden;
 }
