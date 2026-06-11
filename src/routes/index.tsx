@@ -22,6 +22,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import orbiesLogo from "@/assets/orbies-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
