@@ -132,7 +132,7 @@ function VideoBackground() {
   }, []);
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 flex items-end justify-center md:items-stretch">
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex justify-center md:hidden">
       <video
         ref={videoRef}
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
@@ -141,9 +141,29 @@ function VideoBackground() {
         autoPlay
         loop
         preload="auto"
-        className="w-full max-w-3xl object-contain md:max-w-none md:h-full md:w-full md:object-cover"
+        className="w-full max-w-3xl object-contain"
       />
-      <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/95 via-white/70 to-transparent" />
+    </div>
+  );
+}
+
+function DesktopVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, []);
+  return (
+    <div className="hidden md:block w-full px-6 pb-16">
+      <video
+        ref={videoRef}
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
+        muted
+        playsInline
+        autoPlay
+        loop
+        preload="auto"
+        className="w-full h-auto rounded-2xl object-cover"
+      />
     </div>
   );
 }
