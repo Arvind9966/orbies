@@ -209,7 +209,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           Around You
         </h1>
         <p
-          className="animate-fade-rise-delay mt-8 max-w-4xl text-base leading-relaxed sm:text-lg line-clamp-2 md:mx-auto md:max-w-2xl"
+          className="animate-fade-rise-delay mt-8 max-w-4xl text-base leading-relaxed sm:text-lg line-clamp-2 md:mx-auto md:max-w-2xl md:mt-5"
           style={{ color: "#6F6F6F" }}
         >
           Find events, communities, trips, volunteering opportunities and like-minded people in Jaipur — all in one place.
