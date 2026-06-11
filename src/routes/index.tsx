@@ -69,27 +69,42 @@ const CATEGORIES = [
   {
     icon: Calendar,
     title: "Events",
+    tagline: "The Moments That Make Your City Worth Showing Up For.",
     desc: "Startup meetups, open mics, workshops, networking nights.",
+    bg: "#ec2b6e",
+    fg: "#fff7ec",
   },
   {
     icon: Users,
     title: "Communities",
+    tagline: "Your People Are Out There. Stop Scrolling, Start Belonging.",
     desc: "Reading clubs, fitness crews, photography circles, founder groups.",
+    bg: "#1fb59a",
+    fg: "#06231d",
   },
   {
     icon: Mountain,
     title: "Trips",
+    tagline: "Weekends That Don't Disappear Into Another Instagram Reel.",
     desc: "Weekend treks, group travel, bike rides and adventures.",
+    bg: "#ff8a3d",
+    fg: "#2a1208",
   },
   {
     icon: HeartHandshake,
     title: "Volunteering",
+    tagline: "Do Something Today That Outlives The Notification.",
     desc: "NGO drives, blood donations, environmental causes.",
+    bg: "#7c5cff",
+    fg: "#f4f0ff",
   },
   {
     icon: Sparkles,
     title: "People",
+    tagline: "The Founders, Creators And Friends You Haven't Met Yet.",
     desc: "Founders, creators, students and professionals near you.",
+    bg: "#facc15",
+    fg: "#2a1a00",
   },
 ];
 
@@ -493,31 +508,42 @@ function Categories() {
           stackPosition="22%"
           scaleEndPosition="12%"
         >
-          {CATEGORIES.map(({ icon: Icon, title, desc }, i) => (
+          {CATEGORIES.map(({ icon: Icon, title, tagline, desc, bg, fg }, i) => (
             <ScrollStackItem
               key={title}
-              itemClassName="group overflow-hidden border border-border bg-card/95 backdrop-blur"
+              itemClassName="overflow-hidden border-0"
             >
               <div
+                className="absolute inset-0"
+                style={{ background: bg }}
                 aria-hidden
-                className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-50 blur-2xl"
-                style={{ background: "var(--gradient-warm)" }}
               />
               <div
-                className="relative grid h-12 w-12 place-items-center rounded-2xl text-primary-foreground sm:h-14 sm:w-14"
-                style={{ background: "var(--gradient-warm)" }}
+                className="relative flex h-full flex-col justify-between"
+                style={{ color: fg }}
               >
-                <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                <div className="flex items-center justify-between">
+                  <span
+                    className="text-[11px] font-semibold uppercase tracking-[0.25em] opacity-80"
+                  >
+                    0{i + 1} — {title}
+                  </span>
+                  <Icon className="h-6 w-6 opacity-90" />
+                </div>
+
+                <div>
+                  <h3 className="font-display text-[40px] font-black uppercase leading-[0.95] tracking-[-0.03em] sm:text-6xl">
+                    {title}
+                  </h3>
+                  <p className="mt-4 max-w-xl font-display text-[18px] font-bold leading-tight tracking-[-0.01em] sm:text-2xl">
+                    {tagline}
+                  </p>
+                </div>
+
+                <p className="text-[13px] leading-relaxed opacity-80 sm:text-sm">
+                  {desc}
+                </p>
               </div>
-              <h3 className="relative mt-5 font-display text-[24px] font-semibold tracking-[-0.02em] sm:text-3xl">
-                {title}
-              </h3>
-              <p className="relative mt-2 max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-base">
-                {desc}
-              </p>
-              <span className="relative mt-6 inline-block text-[11px] font-medium text-foreground/40 sm:text-xs">
-                0{i + 1}
-              </span>
             </ScrollStackItem>
           ))}
         </ScrollStack>
