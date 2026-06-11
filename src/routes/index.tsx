@@ -143,6 +143,7 @@ function VideoBackground() {
         preload="auto"
         className="w-full max-w-3xl object-contain md:max-w-none md:h-full md:w-full md:object-cover"
       />
+      <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-white/95 via-white/70 to-transparent" />
     </div>
   );
 }
