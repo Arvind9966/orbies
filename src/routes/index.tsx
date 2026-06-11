@@ -132,7 +132,7 @@ function VideoBackground() {
   }, []);
 
   return (
-    <div className="pointer-events-none z-0 flex flex-1 items-center justify-center overflow-hidden">
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex justify-center">
       <video
         ref={videoRef}
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
@@ -141,7 +141,7 @@ function VideoBackground() {
         autoPlay
         loop
         preload="auto"
-        className="h-full w-full max-w-3xl object-contain"
+        className="w-full max-w-3xl object-contain"
       />
     </div>
   );
@@ -149,11 +149,11 @@ function VideoBackground() {
 
 function Hero({ onOpen }: { onOpen: () => void }) {
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-white">
-      <Nav onOpen={onOpen} />
+    <div className="relative min-h-screen w-full overflow-hidden bg-white">
       <VideoBackground />
+      <Nav onOpen={onOpen} />
       <section
-        className="relative z-10 flex flex-col items-center px-6 pb-16 pt-6 text-center sm:pt-10"
+        className="relative z-10 flex flex-col items-center justify-start px-6 pb-16 pt-6 text-center sm:pt-10"
       >
         <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur">
           <span className="relative flex h-1.5 w-1.5">
