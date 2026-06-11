@@ -112,10 +112,6 @@ function Nav({ onOpen }: { onOpen: () => void }) {
       <a href="#" className="font-serif-display text-2xl tracking-tight text-black sm:text-3xl">
         Orbies
       </a>
-      <div className="flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
-        <MapPin className="h-3 w-3" />
-        <span>Jaipur</span>
-      </div>
       <button
         onClick={onOpen}
         className="rounded-full bg-black px-5 py-2 text-xs font-medium text-white transition-transform hover:scale-[1.03] sm:px-6 sm:py-2.5 sm:text-sm"
