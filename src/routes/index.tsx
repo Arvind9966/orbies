@@ -167,20 +167,16 @@ function VideoBackground() {
   }, []);
 
   return (
-    <div
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-0"
-      style={{ height: "55%" }}
-    >
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex justify-center">
       <video
         ref={videoRef}
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
         muted
         playsInline
         autoPlay
-        className="h-full w-full object-cover"
+        className="w-full max-w-3xl object-contain"
         style={{ opacity: 0, transition: "opacity 80ms linear" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/40" />
     </div>
   );
 }
