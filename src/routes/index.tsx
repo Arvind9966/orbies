@@ -485,7 +485,7 @@ function Field({
 
 function Categories() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-14 lg:py-24">
+    <section className="mx-auto max-w-6xl px-5 py-6 lg:py-12">
       <div className="max-w-2xl">
         <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
           One place
