@@ -187,11 +187,10 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           Around You
         </h1>
         <p
-          className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed sm:text-lg"
+          className="animate-fade-rise-delay mt-8 max-w-4xl text-base leading-relaxed sm:text-lg line-clamp-2"
           style={{ color: "#6F6F6F" }}
         >
-          2,400+ people are already on Orbies — discovering events, trips,
-          communities and meetups around them. Log in to see what's happening near you.
+          Find events, communities, trips, volunteering opportunities and like-minded people in Jaipur — all in one place.
         </p>
         <button
           onClick={onOpen}
