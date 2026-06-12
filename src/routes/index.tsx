@@ -469,14 +469,49 @@ function WaitlistDialog({
               box-shadow: 0 0 0 4px oklch(0.68 0.21 30 / 0.15);
             }
             .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
-            @keyframes orb-fall-in {
-              0% { transform: translate(-50%, -160%) rotate(-8deg); opacity: 0; }
-              60% { transform: translate(-50%, -42%) rotate(3deg); opacity: 1; }
-              80% { transform: translate(-50%, -52%) rotate(-1.5deg); opacity: 1; }
-              100% { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
+            @keyframes orb-drop {
+              0%   { transform: translateY(-120vh) rotate(-6deg); }
+              55%  { transform: translateY(0) rotate(4deg); }
+              72%  { transform: translateY(-8px) rotate(-3deg); }
+              85%  { transform: translateY(0) rotate(1.5deg); }
+              100% { transform: translateY(0) rotate(0deg); }
             }
-            [data-slot="dialog-content"].orb-fall { animation: orb-fall-in 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) both !important; transform-origin: top center; }
+            @keyframes orb-rope-grow {
+              0%   { height: 0; opacity: 0; }
+              40%  { opacity: 1; }
+              100% { height: 50vh; opacity: 1; }
+            }
+            .orb-dialog { overflow: visible !important; }
+            .orb-swing {
+              transform-origin: top center;
+              animation: orb-drop 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+              will-change: transform;
+            }
+            .orb-rope {
+              position: absolute;
+              left: 50%;
+              bottom: 100%;
+              width: 2px;
+              background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #b8865b 12%, #8b5a2b 100%);
+              transform: translateX(-50%);
+              border-radius: 2px;
+              animation: orb-rope-grow 0.45s ease-out both;
+              z-index: 1;
+            }
+            .orb-rope::after {
+              content: "";
+              position: absolute;
+              bottom: -6px;
+              left: 50%;
+              width: 12px;
+              height: 12px;
+              border-radius: 9999px;
+              background: #8b5a2b;
+              transform: translateX(-50%);
+              box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+            }
           `}</style>
+        </div>
         </div>
       </DialogContent>
     </Dialog>
