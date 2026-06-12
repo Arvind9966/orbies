@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/dialog";
 import orbiesLogo from "@/assets/orbies-logo-transparent.png.asset.json";
 import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
+import Lanyard from "@/components/lanyard/Lanyard";
 
 export const Route = createFileRoute("/")({
   head: () => ({
