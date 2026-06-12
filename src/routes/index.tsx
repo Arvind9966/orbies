@@ -314,12 +314,12 @@ function WaitlistDialog({
         {step === 1 && (
           <>
 
-            <DialogHeader>
-              <DialogTitle className="font-display text-2xl">Log in to Orbies</DialogTitle>
-              <DialogDescription>
+            <div className="space-y-1.5">
+              <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">Log in to Orbies</h2>
+              <p className="text-sm text-muted-foreground">
                 Quick login so we can show you what's happening near you tonight.
-              </DialogDescription>
-            </DialogHeader>
+              </p>
+            </div>
             <div className="mt-2 space-y-4">
               <Field label="Name">
                 <input
