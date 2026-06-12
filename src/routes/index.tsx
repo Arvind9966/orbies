@@ -616,44 +616,18 @@ function WaitlistDialog({
               background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 100%);
               pointer-events: none;
             }
-            /* SVG knot tying rope to the card */
+            /* SVG knot tying rope to the top of the card */
             .orb-knot {
               position: absolute;
               left: 50%;
-              bottom: -6px;
-              width: 56px;
-              height: 42px;
+              top: -22px;
+              width: 64px;
+              height: 45px;
               transform: translateX(-50%);
-              z-index: 2;
-              filter: drop-shadow(0 3px 3px rgba(0,0,0,0.35));
+              z-index: 3;
+              filter: drop-shadow(0 4px 3px rgba(0,0,0,0.35));
               pointer-events: none;
               animation: orb-rope-grow 0.6s ease-out both;
-            }
-            /* small grommet/eyelet sunk into the card where the knot threads through */
-            .orb-grommet {
-              position: absolute;
-              left: 50%;
-              top: -7px;
-              width: 18px;
-              height: 14px;
-              transform: translateX(-50%);
-              border-radius: 50%;
-              background:
-                radial-gradient(ellipse at 50% 35%, #1a1a1a 0%, #0a0a0a 60%, #000 100%);
-              box-shadow:
-                inset 0 1px 1px rgba(255,255,255,0.25),
-                inset 0 -1px 2px rgba(0,0,0,0.8),
-                0 1px 2px rgba(0,0,0,0.4);
-              z-index: 1;
-              pointer-events: none;
-            }
-            .orb-grommet::before {
-              content: "";
-              position: absolute;
-              inset: 3px 4px;
-              border-radius: 50%;
-              background: #000;
-              box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
             }
           `}</style>
         </div>
