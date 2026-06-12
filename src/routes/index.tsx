@@ -307,7 +307,7 @@ function WaitlistDialog({
   }
 
   const formContent = (
-    <div className="lanyard-form-card h-full w-full overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground">
+    <div className="lanyard-form-card overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground">
       <>
 
 
@@ -495,12 +495,12 @@ function WaitlistDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[640px] p-0 overflow-hidden border-0 bg-transparent shadow-none">
+      <DialogContent className="h-[640px] border-0 !bg-transparent p-0 shadow-none sm:max-w-[640px] [&>button]:z-30">
         <DialogTitle className="sr-only">Log in to Orbies</DialogTitle>
         <DialogDescription className="sr-only">
           Sign up to discover events, communities and people near you.
         </DialogDescription>
-        <div className="relative h-[640px] w-full">
+        <div className="relative h-full w-full overflow-visible bg-transparent">
           <Lanyard
             position={[0, 0, 13]}
             gravity={[0, -40, 0]}
