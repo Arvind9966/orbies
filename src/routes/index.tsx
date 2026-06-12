@@ -307,7 +307,21 @@ function WaitlistDialog({
   }
 
   const formContent = (
-    <div className="h-full w-full overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground">
+    <div
+      className="overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground"
+      style={{
+        position: "fixed",
+        left: "50%",
+        top: "50%",
+        zIndex: 9999,
+        width: "286px",
+        height: "398px",
+        pointerEvents: "auto",
+        boxShadow: "0 18px 45px rgb(0 0 0 / 0.18)",
+        transformOrigin: "top center",
+        animation: "orb-card-drop 900ms cubic-bezier(.2, .9, .2, 1.05) both",
+      }}
+    >
       <>
 
 
@@ -466,6 +480,11 @@ function WaitlistDialog({
             box-shadow: 0 0 0 4px oklch(0.68 0.21 30 / 0.15);
           }
           .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
+          @keyframes orb-card-drop {
+            0% { transform: translate(-50%, -125%) rotate(-5deg); opacity: 0; }
+            72% { transform: translate(-50%, -43%) rotate(3deg); opacity: 1; }
+            100% { transform: translate(-50%, -48%) rotate(0deg); opacity: 1; }
+          }
         `}</style>
       </>
     </div>
@@ -473,18 +492,18 @@ function WaitlistDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[640px] p-0 overflow-hidden border-0 bg-transparent shadow-none">
+      <DialogContent className="!block h-[640px] border-0 !bg-transparent p-0 shadow-none sm:max-w-[640px] [&>button]:z-30">
         <DialogTitle className="sr-only">Log in to Orbies</DialogTitle>
         <DialogDescription className="sr-only">
           Sign up to discover events, communities and people near you.
         </DialogDescription>
-        <div className="relative h-[640px] w-full">
+        <div className="relative h-[640px] w-full overflow-visible bg-transparent">
           <Lanyard
             position={[0, 0, 13]}
             gravity={[0, -40, 0]}
             transparent
-            cardChildren={formContent}
           />
+          {formContent}
         </div>
       </DialogContent>
     </Dialog>

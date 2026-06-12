@@ -294,8 +294,9 @@ function Band({
             {cardChildren && (
               <Html
                 transform
-                position={[0, 0, 0.012]}
-                scale={0.0045}
+                center
+                position={[0, 0.525, 0.025]}
+                scale={0.14}
                 pointerEvents="auto"
                 zIndexRange={[100, 0]}
               >
