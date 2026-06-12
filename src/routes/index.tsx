@@ -307,14 +307,22 @@ function WaitlistDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="orb-dialog rounded-[18px] border-0 p-0 shadow-none overflow-visible bg-transparent sm:max-w-[380px] [&>button]:z-30">
+      <DialogContent className="orb-dialog rounded-[18px] border-0 p-0 shadow-none overflow-visible bg-transparent sm:max-w-[380px] [&>button]:hidden">
         <DialogTitle className="sr-only">Log in to Orbies</DialogTitle>
         <DialogDescription className="sr-only">
           Sign up to discover events, communities and people near you.
         </DialogDescription>
         <div className="orb-swing">
         <div aria-hidden className="orb-rope" />
-        <div className="overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
+        <div className="relative overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => handleOpenChange(false)}
+            className="absolute right-3 top-3 z-30 grid h-8 w-8 place-items-center rounded-full bg-black/5 text-foreground/70 transition hover:bg-black/10 hover:text-foreground"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
           {step === 1 && (
             <>
               <div className="space-y-1.5">
@@ -470,29 +478,36 @@ function WaitlistDialog({
             }
             .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
             @keyframes orb-drop {
-              0%   { transform: translateY(-120vh) rotate(0deg); }
-              55%  { transform: translateY(0) rotate(-7deg); }
-              70%  { transform: translateY(0) rotate(5deg); }
-              82%  { transform: translateY(0) rotate(-3deg); }
-              92%  { transform: translateY(0) rotate(1.5deg); }
-              100% { transform: translateY(0) rotate(0deg); }
+              0%   { transform: translateY(-130vh) rotate(0deg); }
+              50%  { transform: translateY(2vh)   rotate(-5deg); }
+              68%  { transform: translateY(-1vh)  rotate(3.5deg); }
+              82%  { transform: translateY(0.4vh) rotate(-2deg); }
+              92%  { transform: translateY(0)     rotate(1deg); }
+              100% { transform: translateY(0)     rotate(0deg); }
             }
             @keyframes orb-sway {
-              0%, 100% { transform: rotate(-2deg); }
-              50%      { transform: rotate(2deg); }
+              0%, 100% { transform: rotate(-1.6deg); }
+              50%      { transform: rotate(1.6deg); }
             }
+            /* Rope grows in, then gently stretches/contracts with the swing for a gravity feel */
             @keyframes orb-rope-grow {
-              0%   { height: 0; opacity: 0; }
-              40%  { opacity: 1; }
-              100% { height: 50vh; opacity: 1; }
+              0%   { height: 0;    opacity: 0; transform: translateX(-50%) scaleY(0.6); }
+              40%  {              opacity: 1; }
+              100% { height: 50vh; opacity: 1; transform: translateX(-50%) scaleY(1); }
+            }
+            @keyframes orb-rope-stretch {
+              0%, 100% { transform: translateX(-50%) scaleY(1); }
+              25%      { transform: translateX(-50%) scaleY(1.012); }
+              50%      { transform: translateX(-50%) scaleY(0.994); }
+              75%      { transform: translateX(-50%) scaleY(1.012); }
             }
             .orb-dialog { overflow: visible !important; }
             .orb-swing {
               /* Pivot from the ceiling (top of rope) so rope + card swing together */
               transform-origin: 50% -50vh;
               animation:
-                orb-drop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both,
-                orb-sway 3.6s ease-in-out 1.2s infinite;
+                orb-drop 1.5s cubic-bezier(0.22, 1, 0.36, 1) both,
+                orb-sway 4.8s cubic-bezier(0.45, 0, 0.55, 1) 1.5s infinite;
               will-change: transform;
               position: relative;
             }
@@ -502,8 +517,11 @@ function WaitlistDialog({
               bottom: 100%;
               width: 6px;
               transform: translateX(-50%);
+              transform-origin: top center;
               border-radius: 3px;
-              animation: orb-rope-grow 0.5s ease-out both;
+              animation:
+                orb-rope-grow 0.6s ease-out both,
+                orb-rope-stretch 4.8s cubic-bezier(0.45, 0, 0.55, 1) 1.5s infinite;
               z-index: 1;
               background:
                 /* braided twist highlights */
