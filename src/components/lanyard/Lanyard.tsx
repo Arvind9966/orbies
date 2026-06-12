@@ -2,7 +2,7 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
-import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
+import { useGLTF, useTexture, Environment, Lightformer, Html } from '@react-three/drei';
 import {
   BallCollider,
   CuboidCollider,
@@ -39,6 +39,7 @@ type LanyardProps = {
   imageFit?: 'cover' | 'contain';
   lanyardImage?: string | null;
   lanyardWidth?: number;
+  cardChildren?: React.ReactNode;
 };
 
 export default function Lanyard({
@@ -51,6 +52,7 @@ export default function Lanyard({
   imageFit = 'cover',
   lanyardImage = null,
   lanyardWidth = 1,
+  cardChildren = null,
 }: LanyardProps) {
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.innerWidth < 768,
@@ -80,6 +82,7 @@ export default function Lanyard({
             imageFit={imageFit}
             lanyardImage={lanyardImage}
             lanyardWidth={lanyardWidth}
+            cardChildren={cardChildren}
           />
         </Physics>
         <Environment blur={0.75}>
@@ -93,6 +96,8 @@ export default function Lanyard({
   );
 }
 
+
+
 type BandProps = {
   maxSpeed?: number;
   minSpeed?: number;
@@ -102,6 +107,7 @@ type BandProps = {
   imageFit?: 'cover' | 'contain';
   lanyardImage?: string | null;
   lanyardWidth?: number;
+  cardChildren?: React.ReactNode;
 };
 
 function Band({
@@ -113,6 +119,7 @@ function Band({
   imageFit = 'cover',
   lanyardImage = null,
   lanyardWidth = 1,
+  cardChildren = null,
 }: BandProps) {
   const band = useRef<any>(null),
     fixed = useRef<any>(null),
@@ -284,6 +291,27 @@ function Band({
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+            {cardChildren && (
+              <Html
+                transform
+                occlude="blending"
+                position={[0, 0, 0.025]}
+                scale={0.18}
+                pointerEvents="auto"
+              >
+                <div
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onPointerUp={(e) => e.stopPropagation()}
+                  onPointerMove={(e) => e.stopPropagation()}
+                  style={{
+                    width: 360,
+                    height: 500,
+                  }}
+                >
+                  {cardChildren}
+                </div>
+              </Html>
+            )}
           </group>
         </RigidBody>
       </group>
