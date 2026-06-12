@@ -494,12 +494,12 @@ function WaitlistDialog({
                 <CheckCircle2 className="h-7 w-7" />
               </div>
               <h3 className="mt-5 font-display text-2xl font-semibold">
-                You're in, {name.split(" ")[0] || "friend"} 🎉
+                {name.trim() ? `Welcome in, ${name.trim().split(" ")[0]}` : "You're in"} 🎉
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                We're loading {interest ? interest.toLowerCase() : "things"} happening
-                around {city || "you"} right now. Your feed will be ready in a few
-                moments — we'll text you on {mobile ? mobile : "your number"} the
+                We're tuning your feed to the best happenings around
+                {" "}{city.trim() || "your city"} right now. It'll be ready in a
+                moment, and we'll ping you on {mobile.trim() || "your number"} the
                 second it's live.
               </p>
               <button
