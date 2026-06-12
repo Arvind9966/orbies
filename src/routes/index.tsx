@@ -569,24 +569,43 @@ function WaitlistDialog({
               pointer-events: none;
             }
             .orb-rope::after {
-              /* whipped end / knot tying rope to card */
+              /* whipped (tightly wrapped) end binding rope to card */
               content: "";
               position: absolute;
-              bottom: -14px;
+              bottom: -16px;
               left: 50%;
-              width: 28px;
-              height: 22px;
-              border-radius: 10px 10px 8px 8px / 14px 14px 8px 8px;
+              width: 22px;
+              height: 26px;
+              border-radius: 6px 6px 5px 5px / 9px 9px 5px 5px;
               transform: translateX(-50%);
               background:
-                repeating-linear-gradient(90deg,
-                  rgba(0,0,0,0.35) 0 1px,
-                  transparent 1px 3px),
-                linear-gradient(180deg, #6b4220 0%, #2c1a08 100%);
+                /* fine twine wrap lines */
+                repeating-linear-gradient(0deg,
+                  rgba(0,0,0,0.55) 0 0.6px,
+                  rgba(255,220,170,0.08) 0.6px 1.6px,
+                  rgba(0,0,0,0.35) 1.6px 2px,
+                  transparent 2px 2.4px),
+                /* subtle vertical sheen across the cylinder */
+                linear-gradient(90deg,
+                  rgba(0,0,0,0.55) 0%,
+                  rgba(255,220,170,0.18) 35%,
+                  rgba(255,220,170,0.28) 50%,
+                  rgba(255,220,170,0.10) 70%,
+                  rgba(0,0,0,0.55) 100%),
+                /* base tar/wax color */
+                linear-gradient(180deg, #3a2410 0%, #1a0f06 60%, #0d0703 100%);
+              background-blend-mode: multiply, screen, normal;
               box-shadow:
-                inset 0 -3px 5px rgba(0,0,0,0.55),
-                inset 0 2px 3px rgba(255,220,180,0.18),
-                0 3px 4px rgba(0,0,0,0.35);
+                inset 0 1px 1px rgba(0,0,0,0.7),
+                inset 0 -2px 3px rgba(0,0,0,0.7),
+                inset 1px 0 1px rgba(0,0,0,0.5),
+                inset -1px 0 1px rgba(0,0,0,0.5),
+                0 3px 5px rgba(0,0,0,0.45);
+            }
+            /* dark cinch shadow where rope enters the whipping */
+            .orb-rope .orb-cinch,
+            .orb-cinch-top {
+              display: none;
             }
           `}</style>
         </div>
