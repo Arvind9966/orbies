@@ -515,38 +515,48 @@ function WaitlistDialog({
               position: absolute;
               left: 50%;
               bottom: 100%;
-              width: 6px;
+              width: 16px;
               transform: translateX(-50%);
               transform-origin: top center;
-              border-radius: 3px;
+              border-radius: 8px;
               animation:
                 orb-rope-grow 0.6s ease-out both,
                 orb-rope-stretch 4.8s cubic-bezier(0.45, 0, 0.55, 1) 1.5s infinite;
               z-index: 1;
-              background:
-                /* braided twist highlights */
-                repeating-linear-gradient(
-                  135deg,
-                  rgba(255, 240, 210, 0.35) 0px,
-                  rgba(255, 240, 210, 0.35) 2px,
-                  rgba(0, 0, 0, 0.25) 2px,
-                  rgba(0, 0, 0, 0.25) 4px,
-                  rgba(255, 240, 210, 0.15) 4px,
-                  rgba(255, 240, 210, 0.15) 6px
-                ),
-                /* base rope color with shading on edges */
-                linear-gradient(
-                  90deg,
-                  #5a3a1c 0%,
-                  #a7723f 35%,
-                  #d4a373 50%,
-                  #a7723f 65%,
-                  #5a3a1c 100%
-                );
-              background-blend-mode: overlay, normal;
+              /* Tiled SVG: jute-colored 3-strand twist segment, repeated vertically */
+              background-color: #8b5a2b;
+              background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='14' viewBox='0 0 16 14'>\
+<defs>\
+<linearGradient id='g' x1='0' y1='0' x2='1' y2='0'>\
+<stop offset='0' stop-color='%23492a10'/>\
+<stop offset='0.2' stop-color='%23805227'/>\
+<stop offset='0.5' stop-color='%23e7c089'/>\
+<stop offset='0.8' stop-color='%23805227'/>\
+<stop offset='1' stop-color='%23492a10'/>\
+</linearGradient>\
+</defs>\
+<rect width='16' height='14' fill='url(%23g)'/>\
+<g stroke='%23341d08' stroke-width='1.3' fill='none' opacity='0.55' stroke-linecap='round'>\
+<path d='M-3 5 Q4 1 9 -1 T20 -6'/>\
+<path d='M-3 12 Q4 8 9 6 T20 1'/>\
+<path d='M-3 19 Q4 15 9 13 T20 8'/>\
+</g>\
+<g stroke='%23fff1d6' stroke-width='0.7' fill='none' opacity='0.4' stroke-linecap='round'>\
+<path d='M-3 3 Q4 -1 9 -3 T20 -8'/>\
+<path d='M-3 10 Q4 6 9 4 T20 -1'/>\
+<path d='M-3 17 Q4 13 9 11 T20 6'/>\
+</g>\
+<g stroke='%23341d08' stroke-width='0.4' fill='none' opacity='0.5'>\
+<path d='M2 -1 L0 4 M5 1 L3 6 M8 3 L6 8 M11 5 L9 10 M14 7 L12 12'/>\
+</g>\
+</svg>");
+              background-repeat: repeat-y;
+              background-size: 16px 14px;
               box-shadow:
-                inset 0 0 1px rgba(0,0,0,0.4),
-                0 0 0.5px rgba(0,0,0,0.3);
+                inset 2px 0 2px rgba(0,0,0,0.45),
+                inset -2px 0 2px rgba(0,0,0,0.45),
+                inset 0 0 1px rgba(0,0,0,0.3),
+                0 0 1px rgba(0,0,0,0.3);
             }
             .orb-rope::before {
               /* fade rope into the ceiling */
@@ -559,23 +569,24 @@ function WaitlistDialog({
               pointer-events: none;
             }
             .orb-rope::after {
-              /* knot tying rope to card */
+              /* whipped end / knot tying rope to card */
               content: "";
               position: absolute;
-              bottom: -10px;
+              bottom: -14px;
               left: 50%;
-              width: 22px;
-              height: 16px;
-              border-radius: 50%;
+              width: 28px;
+              height: 22px;
+              border-radius: 10px 10px 8px 8px / 14px 14px 8px 8px;
               transform: translateX(-50%);
               background:
-                radial-gradient(ellipse at 35% 30%, #e8c290 0%, #a7723f 45%, #5a3a1c 100%),
-                repeating-linear-gradient(45deg, rgba(0,0,0,0.25) 0 2px, transparent 2px 4px);
-              background-blend-mode: multiply, normal;
+                repeating-linear-gradient(90deg,
+                  rgba(0,0,0,0.35) 0 1px,
+                  transparent 1px 3px),
+                linear-gradient(180deg, #6b4220 0%, #2c1a08 100%);
               box-shadow:
-                inset -2px -2px 4px rgba(0,0,0,0.45),
-                inset 2px 2px 3px rgba(255,220,180,0.35),
-                0 2px 3px rgba(0,0,0,0.3);
+                inset 0 -3px 5px rgba(0,0,0,0.55),
+                inset 0 2px 3px rgba(255,220,180,0.18),
+                0 3px 4px rgba(0,0,0,0.35);
             }
           `}</style>
         </div>
