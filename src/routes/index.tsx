@@ -500,24 +500,64 @@ function WaitlistDialog({
               position: absolute;
               left: 50%;
               bottom: 100%;
-              width: 2px;
-              background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #b8865b 12%, #8b5a2b 100%);
+              width: 6px;
               transform: translateX(-50%);
-              border-radius: 2px;
+              border-radius: 3px;
               animation: orb-rope-grow 0.5s ease-out both;
               z-index: 1;
+              background:
+                /* braided twist highlights */
+                repeating-linear-gradient(
+                  135deg,
+                  rgba(255, 240, 210, 0.35) 0px,
+                  rgba(255, 240, 210, 0.35) 2px,
+                  rgba(0, 0, 0, 0.25) 2px,
+                  rgba(0, 0, 0, 0.25) 4px,
+                  rgba(255, 240, 210, 0.15) 4px,
+                  rgba(255, 240, 210, 0.15) 6px
+                ),
+                /* base rope color with shading on edges */
+                linear-gradient(
+                  90deg,
+                  #5a3a1c 0%,
+                  #a7723f 35%,
+                  #d4a373 50%,
+                  #a7723f 65%,
+                  #5a3a1c 100%
+                );
+              background-blend-mode: overlay, normal;
+              box-shadow:
+                inset 0 0 1px rgba(0,0,0,0.4),
+                0 0 0.5px rgba(0,0,0,0.3);
             }
-            .orb-rope::after {
+            .orb-rope::before {
+              /* fade rope into the ceiling */
               content: "";
               position: absolute;
-              bottom: -6px;
-              left: 50%;
-              width: 12px;
-              height: 12px;
-              border-radius: 9999px;
-              background: #8b5a2b;
+              top: 0; left: 50%;
+              width: 100%; height: 24px;
               transform: translateX(-50%);
-              box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+              background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 100%);
+              pointer-events: none;
+            }
+            .orb-rope::after {
+              /* knot tying rope to card */
+              content: "";
+              position: absolute;
+              bottom: -10px;
+              left: 50%;
+              width: 22px;
+              height: 16px;
+              border-radius: 50%;
+              transform: translateX(-50%);
+              background:
+                radial-gradient(ellipse at 35% 30%, #e8c290 0%, #a7723f 45%, #5a3a1c 100%),
+                repeating-linear-gradient(45deg, rgba(0,0,0,0.25) 0 2px, transparent 2px 4px);
+              background-blend-mode: multiply, normal;
+              box-shadow:
+                inset -2px -2px 4px rgba(0,0,0,0.45),
+                inset 2px 2px 3px rgba(255,220,180,0.35),
+                0 2px 3px rgba(0,0,0,0.3);
             }
           `}</style>
         </div>
