@@ -434,20 +434,21 @@ function WaitlistDialog({
             <>
               <div className="space-y-1.5">
                 <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">
-                  What do you want to see first?
+                  What are you into?
                 </h2>
                 <p className="text-sm text-muted-foreground">
-                  Pick one — we'll open your feed with this on top.
+                  Pick a few. We'll line your feed up with these first.
                 </p>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
                 {INTERESTS.map((opt) => {
-                  const active = interest === opt;
+                  const active = interests.includes(opt);
                   return (
                     <button
                       type="button"
                       key={opt}
-                      onClick={() => setInterest(opt)}
+                      onClick={() => toggleInterest(opt)}
+                      aria-pressed={active}
                       className={
                         "rounded-full border px-3.5 py-1.5 text-sm transition " +
                         (active
