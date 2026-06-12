@@ -306,15 +306,10 @@ function WaitlistDialog({
     setStep(3);
   }
 
-  return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-[560px] p-0 overflow-hidden border-0 bg-transparent shadow-none">
-        <div className="relative h-[640px] w-full">
-          <div className="absolute inset-0">
-            <Lanyard position={[0, 0, 13]} gravity={[0, -40, 0]} transparent />
-          </div>
-          <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-6">
-            <div className="pointer-events-auto w-[88%] max-w-[360px] rounded-2xl bg-white/85 backdrop-blur-xl shadow-2xl ring-1 ring-black/5 p-5 animate-fade-in" style={{ animationDelay: "0.6s", animationFillMode: "both" }}>
+  const formContent = (
+    <div className="h-full w-full overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground">
+      <>
+
 
         {step === 1 && (
           <>
