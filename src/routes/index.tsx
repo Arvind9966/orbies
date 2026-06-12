@@ -307,14 +307,22 @@ function WaitlistDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="orb-dialog rounded-[18px] border-0 p-0 shadow-none overflow-visible bg-transparent sm:max-w-[380px] [&>button]:z-30">
+      <DialogContent className="orb-dialog rounded-[18px] border-0 p-0 shadow-none overflow-visible bg-transparent sm:max-w-[380px] [&>button]:hidden">
         <DialogTitle className="sr-only">Log in to Orbies</DialogTitle>
         <DialogDescription className="sr-only">
           Sign up to discover events, communities and people near you.
         </DialogDescription>
         <div className="orb-swing">
         <div aria-hidden className="orb-rope" />
-        <div className="overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
+        <div className="relative overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => handleOpenChange(false)}
+            className="absolute right-3 top-3 z-30 grid h-8 w-8 place-items-center rounded-full bg-black/5 text-foreground/70 transition hover:bg-black/10 hover:text-foreground"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
           {step === 1 && (
             <>
               <div className="space-y-1.5">
