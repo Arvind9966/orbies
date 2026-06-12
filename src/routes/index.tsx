@@ -609,44 +609,44 @@ function WaitlistDialog({
               background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 100%);
               pointer-events: none;
             }
-            .orb-rope::after {
-              /* whipped (tightly wrapped) end binding rope to card */
+            /* SVG knot tying rope to the card */
+            .orb-knot {
+              position: absolute;
+              left: 50%;
+              bottom: -6px;
+              width: 56px;
+              height: 42px;
+              transform: translateX(-50%);
+              z-index: 2;
+              filter: drop-shadow(0 3px 3px rgba(0,0,0,0.35));
+              pointer-events: none;
+              animation: orb-rope-grow 0.6s ease-out both;
+            }
+            /* small grommet/eyelet sunk into the card where the knot threads through */
+            .orb-grommet {
+              position: absolute;
+              left: 50%;
+              top: -7px;
+              width: 18px;
+              height: 14px;
+              transform: translateX(-50%);
+              border-radius: 50%;
+              background:
+                radial-gradient(ellipse at 50% 35%, #1a1a1a 0%, #0a0a0a 60%, #000 100%);
+              box-shadow:
+                inset 0 1px 1px rgba(255,255,255,0.25),
+                inset 0 -1px 2px rgba(0,0,0,0.8),
+                0 1px 2px rgba(0,0,0,0.4);
+              z-index: 1;
+              pointer-events: none;
+            }
+            .orb-grommet::before {
               content: "";
               position: absolute;
-              bottom: -16px;
-              left: 50%;
-              width: 22px;
-              height: 26px;
-              border-radius: 6px 6px 5px 5px / 9px 9px 5px 5px;
-              transform: translateX(-50%);
-              background:
-                /* fine twine wrap lines */
-                repeating-linear-gradient(0deg,
-                  rgba(0,0,0,0.55) 0 0.6px,
-                  rgba(255,220,170,0.08) 0.6px 1.6px,
-                  rgba(0,0,0,0.35) 1.6px 2px,
-                  transparent 2px 2.4px),
-                /* subtle vertical sheen across the cylinder */
-                linear-gradient(90deg,
-                  rgba(0,0,0,0.55) 0%,
-                  rgba(255,220,170,0.18) 35%,
-                  rgba(255,220,170,0.28) 50%,
-                  rgba(255,220,170,0.10) 70%,
-                  rgba(0,0,0,0.55) 100%),
-                /* base tar/wax color */
-                linear-gradient(180deg, #3a2410 0%, #1a0f06 60%, #0d0703 100%);
-              background-blend-mode: multiply, screen, normal;
-              box-shadow:
-                inset 0 1px 1px rgba(0,0,0,0.7),
-                inset 0 -2px 3px rgba(0,0,0,0.7),
-                inset 1px 0 1px rgba(0,0,0,0.5),
-                inset -1px 0 1px rgba(0,0,0,0.5),
-                0 3px 5px rgba(0,0,0,0.45);
-            }
-            /* dark cinch shadow where rope enters the whipping */
-            .orb-rope .orb-cinch,
-            .orb-cinch-top {
-              display: none;
+              inset: 3px 4px;
+              border-radius: 50%;
+              background: #000;
+              box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
             }
           `}</style>
         </div>
