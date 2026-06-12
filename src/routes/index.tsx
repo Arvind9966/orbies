@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/dialog";
 import orbiesLogo from "@/assets/orbies-logo-transparent.png.asset.json";
 import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
+import Lanyard from "@/components/lanyard/Lanyard";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -307,9 +308,15 @@ function WaitlistDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-3xl p-0 overflow-hidden">
+        <div className="grid md:grid-cols-2">
+          <div className="relative h-64 md:h-auto bg-gradient-to-br from-orange-50 via-rose-50 to-amber-50">
+            <Lanyard position={[0, 0, 18]} gravity={[0, -40, 0]} transparent />
+          </div>
+          <div className="p-6 sm:p-8">
         {step === 1 && (
           <>
+
             <DialogHeader>
               <DialogTitle className="font-display text-2xl">Log in to Orbies</DialogTitle>
               <DialogDescription>
@@ -463,6 +470,8 @@ function WaitlistDialog({
           }
           .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
         `}</style>
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );
