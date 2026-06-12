@@ -367,14 +367,14 @@ function WaitlistDialog({
 
         {step === 2 && (
           <>
-            <DialogHeader>
-              <DialogTitle className="font-display text-2xl">
+            <div className="space-y-1.5">
+              <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">
                 What do you want to see first?
-              </DialogTitle>
-              <DialogDescription>
+              </h2>
+              <p className="text-sm text-muted-foreground">
                 Pick one — we'll open your feed with this on top.
-              </DialogDescription>
-            </DialogHeader>
+              </p>
+            </div>
             <div className="mt-3 flex flex-wrap gap-2">
               {INTERESTS.map((opt) => {
                 const active = interest === opt;
