@@ -729,7 +729,7 @@ function Categories() {
   );
 }
 
-function Why() {
+function Why({ onOpen }: { onOpen: () => void }) {
   const steps = [
     {
       label: "Hidden today",
