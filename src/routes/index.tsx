@@ -314,12 +314,12 @@ function WaitlistDialog({
         {step === 1 && (
           <>
 
-            <DialogHeader>
-              <DialogTitle className="font-display text-2xl">Log in to Orbies</DialogTitle>
-              <DialogDescription>
+            <div className="space-y-1.5">
+              <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">Log in to Orbies</h2>
+              <p className="text-sm text-muted-foreground">
                 Quick login so we can show you what's happening near you tonight.
-              </DialogDescription>
-            </DialogHeader>
+              </p>
+            </div>
             <div className="mt-2 space-y-4">
               <Field label="Name">
                 <input
@@ -367,14 +367,14 @@ function WaitlistDialog({
 
         {step === 2 && (
           <>
-            <DialogHeader>
-              <DialogTitle className="font-display text-2xl">
+            <div className="space-y-1.5">
+              <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">
                 What do you want to see first?
-              </DialogTitle>
-              <DialogDescription>
+              </h2>
+              <p className="text-sm text-muted-foreground">
                 Pick one — we'll open your feed with this on top.
-              </DialogDescription>
-            </DialogHeader>
+              </p>
+            </div>
             <div className="mt-3 flex flex-wrap gap-2">
               {INTERESTS.map((opt) => {
                 const active = interest === opt;
@@ -474,6 +474,10 @@ function WaitlistDialog({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[640px] p-0 overflow-hidden border-0 bg-transparent shadow-none">
+        <DialogTitle className="sr-only">Log in to Orbies</DialogTitle>
+        <DialogDescription className="sr-only">
+          Sign up to discover events, communities and people near you.
+        </DialogDescription>
         <div className="relative h-[640px] w-full">
           <Lanyard
             position={[0, 0, 13]}
