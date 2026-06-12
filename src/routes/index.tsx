@@ -307,7 +307,17 @@ function WaitlistDialog({
   }
 
   const formContent = (
-    <div className="lanyard-form-card overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground">
+    <div
+      className="overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground"
+      style={{
+        width: "286px",
+        height: "398px",
+        pointerEvents: "auto",
+        boxShadow: "0 18px 45px rgb(0 0 0 / 0.18)",
+        transformOrigin: "top center",
+        animation: "orb-card-drop 900ms cubic-bezier(.2, .9, .2, 1.05) both",
+      }}
+    >
       <>
 
 
@@ -466,23 +476,6 @@ function WaitlistDialog({
             box-shadow: 0 0 0 4px oklch(0.68 0.21 30 / 0.15);
           }
           .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
-          .lanyard-form-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-          }
-          .lanyard-form-overlay > .lanyard-form-card {
-            width: min(286px, 78vw);
-            height: min(398px, 58vh);
-            pointer-events: auto;
-            box-shadow: 0 18px 45px rgb(0 0 0 / 0.18);
-            transform-origin: top center;
-            animation: orb-card-drop 900ms cubic-bezier(.2, .9, .2, 1.05) both;
-          }
           @keyframes orb-card-drop {
             0% { transform: translateY(-220px) rotate(-5deg); opacity: 0; }
             72% { transform: translateY(42px) rotate(3deg); opacity: 1; }
@@ -495,18 +488,20 @@ function WaitlistDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="h-[640px] border-0 !bg-transparent p-0 shadow-none sm:max-w-[640px] [&>button]:z-30">
+      <DialogContent className="!block h-[640px] border-0 !bg-transparent p-0 shadow-none sm:max-w-[640px] [&>button]:z-30">
         <DialogTitle className="sr-only">Log in to Orbies</DialogTitle>
         <DialogDescription className="sr-only">
           Sign up to discover events, communities and people near you.
         </DialogDescription>
-        <div className="relative h-full w-full overflow-visible bg-transparent">
+        <div className="relative h-[640px] w-full overflow-visible bg-transparent">
           <Lanyard
             position={[0, 0, 13]}
             gravity={[0, -40, 0]}
             transparent
           />
-          <div className="lanyard-form-overlay">{formContent}</div>
+          <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
+            {formContent}
+          </div>
         </div>
       </DialogContent>
     </Dialog>
