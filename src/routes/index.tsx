@@ -307,7 +307,7 @@ function WaitlistDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="rounded-[18px] border-0 p-0 shadow-none overflow-hidden bg-transparent sm:max-w-[380px] [&>button]:z-30">
+      <DialogContent className="orb-fall rounded-[18px] border-0 p-0 shadow-none overflow-hidden bg-transparent sm:max-w-[380px] [&>button]:z-30">
         <DialogTitle className="sr-only">Log in to Orbies</DialogTitle>
         <DialogDescription className="sr-only">
           Sign up to discover events, communities and people near you.
@@ -467,6 +467,13 @@ function WaitlistDialog({
               box-shadow: 0 0 0 4px oklch(0.68 0.21 30 / 0.15);
             }
             .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
+            @keyframes orb-fall-in {
+              0% { transform: translate(-50%, -160%) rotate(-8deg); opacity: 0; }
+              60% { transform: translate(-50%, -42%) rotate(3deg); opacity: 1; }
+              80% { transform: translate(-50%, -52%) rotate(-1.5deg); opacity: 1; }
+              100% { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
+            }
+            [data-slot="dialog-content"].orb-fall { animation: orb-fall-in 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) both !important; transform-origin: top center; }
           `}</style>
         </div>
       </DialogContent>
