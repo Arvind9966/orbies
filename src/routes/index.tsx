@@ -116,7 +116,7 @@ function Index() {
       
       <Hero onOpen={() => setOpen(true)} />
       <Categories />
-      <Why />
+      <Why onOpen={() => setOpen(true)} />
       <Footer />
       <WaitlistDialog open={open} onOpenChange={setOpen} />
     </div>
