@@ -616,11 +616,12 @@ function WaitlistDialog({
               background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 100%);
               pointer-events: none;
             }
-            /* SVG knot tying rope to the top of the card */
+            /* SVG knot resting on top of the card (sitting above its top edge) */
             .orb-knot {
               position: absolute;
               left: 50%;
-              top: -22px;
+              bottom: 100%;
+              margin-bottom: -14px;
               width: 64px;
               height: 45px;
               transform: translateX(-50%);
