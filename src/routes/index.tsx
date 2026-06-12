@@ -310,6 +310,10 @@ function WaitlistDialog({
     <div
       className="overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground"
       style={{
+        position: "fixed",
+        left: "50%",
+        top: "50%",
+        zIndex: 9999,
         width: "286px",
         height: "398px",
         pointerEvents: "auto",
@@ -477,9 +481,9 @@ function WaitlistDialog({
           }
           .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
           @keyframes orb-card-drop {
-            0% { transform: translateY(-220px) rotate(-5deg); opacity: 0; }
-            72% { transform: translateY(42px) rotate(3deg); opacity: 1; }
-            100% { transform: translateY(28px) rotate(0deg); opacity: 1; }
+            0% { transform: translate(-50%, -125%) rotate(-5deg); opacity: 0; }
+            72% { transform: translate(-50%, -43%) rotate(3deg); opacity: 1; }
+            100% { transform: translate(-50%, -48%) rotate(0deg); opacity: 1; }
           }
         `}</style>
       </>
@@ -499,9 +503,7 @@ function WaitlistDialog({
             gravity={[0, -40, 0]}
             transparent
           />
-          <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
-            {formContent}
-          </div>
+          {formContent}
         </div>
       </DialogContent>
     </Dialog>
