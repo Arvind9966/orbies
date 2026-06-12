@@ -730,18 +730,19 @@ function Categories() {
 }
 
 function Why() {
-  const items = [
+  const steps = [
     {
-      k: "Fragmented today",
-      v: "WhatsApp, Instagram, Telegram, word-of-mouth — none of it talks to each other.",
+      label: "Hidden today",
+      chips: ["WhatsApp Groups", "Instagram Stories", "Telegram Channels"],
     },
     {
-      k: "You miss out",
-      v: "Events go unnoticed. Communities stay hidden. Trips happen without you.",
+      label: "You miss",
+      chips: ["Events", "Communities", "Trips", "People"],
     },
     {
-      k: "Orbies fixes it",
-      v: "A single, beautiful place to discover and join everything around you.",
+      label: "Orbies",
+      chips: ["Discover everything in one place."],
+      final: true,
     },
   ];
   return (
@@ -754,16 +755,67 @@ function Why() {
           boxShadow: "var(--shadow-soft)",
         }}
       >
-        <h2 className="max-w-2xl font-display text-[26px] font-bold tracking-[-0.03em] sm:text-4xl">
-          The city is alive — you just can't see it yet.
-        </h2>
-        <div className="mt-7 grid gap-6 sm:mt-10 sm:grid-cols-3 sm:gap-8">
-          {items.map((it) => (
-            <div key={it.k}>
-              <div className="font-display text-[12px] font-semibold uppercase tracking-wider text-primary">
-                {it.k}
+        <div className="max-w-2xl">
+          <div className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+            The city is alive
+          </div>
+          <h2 className="mt-3 font-display text-[26px] font-bold tracking-[-0.03em] sm:text-4xl">
+            You're just missing most of it.
+          </h2>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-5 sm:mt-12 sm:gap-7">
+          {steps.map((step, i) => (
+            <div key={step.label} className="flex w-full flex-col items-center gap-5 sm:gap-7">
+              <div className="w-full max-w-xl text-center">
+                <div
+                  className={`font-display text-[12px] font-semibold uppercase tracking-[0.16em] ${
+                    step.final ? "text-primary" : "text-muted-foreground"
+                  }`}
+                >
+                  {step.label}
+                </div>
+                <div className="mt-3 flex flex-wrap justify-center gap-2 sm:gap-2.5">
+                  {step.chips.map((c) => (
+                    <span
+                      key={c}
+                      className={
+                        step.final
+                          ? "rounded-full px-4 py-2 text-[14px] font-medium text-primary-foreground sm:text-[15px]"
+                          : "rounded-full border border-border bg-card px-3.5 py-1.5 text-[13px] text-foreground/80 sm:text-[14px]"
+                      }
+                      style={
+                        step.final
+                          ? {
+                              background: "var(--gradient-warm)",
+                              boxShadow: "var(--shadow-glow)",
+                            }
+                          : { boxShadow: "var(--shadow-soft)" }
+                      }
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <p className="mt-2 text-[14px] text-foreground/80 sm:text-base">{it.v}</p>
+              {i < steps.length - 1 && (
+                <svg
+                  width="14"
+                  height="22"
+                  viewBox="0 0 14 22"
+                  fill="none"
+                  className="text-primary/50"
+                  aria-hidden
+                >
+                  <path
+                    d="M7 1v18m0 0l-5-5m5 5l5-5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
             </div>
           ))}
         </div>
