@@ -307,7 +307,7 @@ function WaitlistDialog({
   }
 
   const formContent = (
-    <div className="h-full w-full overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground">
+    <div className="lanyard-form-card h-full w-full overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground">
       <>
 
 
@@ -466,6 +466,28 @@ function WaitlistDialog({
             box-shadow: 0 0 0 4px oklch(0.68 0.21 30 / 0.15);
           }
           .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
+          .lanyard-form-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+          }
+          .lanyard-form-overlay > .lanyard-form-card {
+            width: min(286px, 78vw);
+            height: min(398px, 58vh);
+            pointer-events: auto;
+            box-shadow: 0 18px 45px rgb(0 0 0 / 0.18);
+            transform-origin: top center;
+            animation: orb-card-drop 900ms cubic-bezier(.2, .9, .2, 1.05) both;
+          }
+          @keyframes orb-card-drop {
+            0% { transform: translateY(-220px) rotate(-5deg); opacity: 0; }
+            72% { transform: translateY(42px) rotate(3deg); opacity: 1; }
+            100% { transform: translateY(28px) rotate(0deg); opacity: 1; }
+          }
         `}</style>
       </>
     </div>
@@ -483,8 +505,8 @@ function WaitlistDialog({
             position={[0, 0, 13]}
             gravity={[0, -40, 0]}
             transparent
-            cardChildren={formContent}
           />
+          <div className="lanyard-form-overlay">{formContent}</div>
         </div>
       </DialogContent>
     </Dialog>
