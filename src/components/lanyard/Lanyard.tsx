@@ -107,6 +107,7 @@ type BandProps = {
   imageFit?: 'cover' | 'contain';
   lanyardImage?: string | null;
   lanyardWidth?: number;
+  cardChildren?: React.ReactNode;
 };
 
 function Band({
@@ -118,6 +119,7 @@ function Band({
   imageFit = 'cover',
   lanyardImage = null,
   lanyardWidth = 1,
+  cardChildren = null,
 }: BandProps) {
   const band = useRef<any>(null),
     fixed = useRef<any>(null),
