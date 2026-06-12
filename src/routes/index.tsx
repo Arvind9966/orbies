@@ -307,7 +307,7 @@ function WaitlistDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="orb-dialog rounded-[18px] border-0 p-0 shadow-none overflow-visible bg-transparent sm:max-w-[380px] [&>button]:hidden">
+      <DialogContent className="orb-dialog w-[calc(100vw-2rem)] max-w-[340px] rounded-[18px] border-0 p-0 shadow-none overflow-visible bg-transparent sm:max-w-[380px] [&>button]:hidden">
         <DialogTitle className="sr-only">Log in to Orbies</DialogTitle>
         <DialogDescription className="sr-only">
           Sign up to discover events, communities and people near you.
