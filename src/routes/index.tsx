@@ -314,48 +314,55 @@ function WaitlistDialog({
         </DialogDescription>
         <div className="orb-swing">
         <div aria-hidden className="orb-rope" />
-        <svg aria-hidden className="orb-knot" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden className="orb-knot" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="ropeStrand" x1="0" y1="0" x2="1" y2="0">
+            <linearGradient id="ropeStrandV" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stopColor="#3a2410" />
-              <stop offset="0.25" stopColor="#8b5a2b" />
+              <stop offset="0.22" stopColor="#7a4f24" />
               <stop offset="0.5" stopColor="#e7c089" />
-              <stop offset="0.75" stopColor="#8b5a2b" />
+              <stop offset="0.78" stopColor="#7a4f24" />
               <stop offset="1" stopColor="#3a2410" />
             </linearGradient>
-            <pattern id="strandTwist" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
-              <rect width="6" height="6" fill="url(#ropeStrand)" />
-              <path d="M0 3 H6" stroke="#2a1808" strokeWidth="0.8" opacity="0.55" />
-              <path d="M0 1 H6" stroke="#fff1d6" strokeWidth="0.5" opacity="0.35" />
+            <pattern id="strandTwist" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
+              <rect width="7" height="7" fill="url(#ropeStrandV)" />
+              <path d="M0 3.5 H7" stroke="#2a1808" strokeWidth="0.9" opacity="0.55" />
+              <path d="M0 1.2 H7" stroke="#fff1d6" strokeWidth="0.5" opacity="0.35" />
             </pattern>
+            <radialGradient id="bulgeShade" cx="0.4" cy="0.35" r="0.7">
+              <stop offset="0" stopColor="rgba(255,235,200,0.45)" />
+              <stop offset="0.6" stopColor="rgba(0,0,0,0)" />
+              <stop offset="1" stopColor="rgba(0,0,0,0.45)" />
+            </radialGradient>
           </defs>
-          {/* drop shadow */}
-          <ellipse cx="40" cy="52" rx="26" ry="3" fill="rgba(0,0,0,0.25)" />
-          {/* left loop (back) */}
-          <path d="M40 6 C 18 10, 10 28, 22 42 C 30 50, 42 48, 44 38"
-            stroke="url(#strandTwist)" strokeWidth="11" fill="none" strokeLinecap="round" />
-          {/* right loop (back) */}
-          <path d="M40 6 C 62 10, 70 28, 58 42 C 50 50, 38 48, 36 38"
-            stroke="url(#strandTwist)" strokeWidth="11" fill="none" strokeLinecap="round" />
-          {/* central wrap/knot bulge (front) */}
-          <ellipse cx="40" cy="32" rx="14" ry="11" fill="url(#strandTwist)" />
-          <ellipse cx="40" cy="32" rx="14" ry="11" fill="none" stroke="#2a1808" strokeWidth="0.8" opacity="0.5" />
-          {/* tight wrap lines across central knot */}
-          <g stroke="#2a1808" strokeWidth="0.9" opacity="0.6" fill="none" strokeLinecap="round">
-            <path d="M28 28 Q40 26 52 28" />
-            <path d="M27 32 Q40 30 53 32" />
-            <path d="M28 36 Q40 34 52 36" />
+          {/* soft cast shadow on card */}
+          <ellipse cx="50" cy="62" rx="30" ry="3.5" fill="rgba(0,0,0,0.28)" />
+          {/* symmetric back loops emerging from behind the central knot */}
+          <path d="M50 4 C 22 8, 10 30, 26 48 C 34 56, 46 52, 50 42"
+            stroke="url(#strandTwist)" strokeWidth="12" fill="none" strokeLinecap="round" />
+          <path d="M50 4 C 78 8, 90 30, 74 48 C 66 56, 54 52, 50 42"
+            stroke="url(#strandTwist)" strokeWidth="12" fill="none" strokeLinecap="round" />
+          {/* dark cinch where rope enters the knot */}
+          <ellipse cx="50" cy="10" rx="9" ry="3" fill="rgba(0,0,0,0.45)" />
+          {/* central knot bulge (front) */}
+          <ellipse cx="50" cy="34" rx="18" ry="13" fill="url(#strandTwist)" />
+          <ellipse cx="50" cy="34" rx="18" ry="13" fill="url(#bulgeShade)" />
+          <ellipse cx="50" cy="34" rx="18" ry="13" fill="none" stroke="#2a1808" strokeWidth="0.8" opacity="0.55" />
+          {/* tight horizontal wrap lines across central knot */}
+          <g stroke="#2a1808" strokeWidth="1" opacity="0.6" fill="none" strokeLinecap="round">
+            <path d="M34 28 Q50 25.5 66 28" />
+            <path d="M33 32 Q50 29.5 67 32" />
+            <path d="M33 36 Q50 33.5 67 36" />
+            <path d="M34 40 Q50 37.5 66 40" />
           </g>
-          <g stroke="#fff1d6" strokeWidth="0.5" opacity="0.4" fill="none" strokeLinecap="round">
-            <path d="M28 30 Q40 28 52 30" />
-            <path d="M28 34 Q40 32 52 34" />
+          <g stroke="#fff1d6" strokeWidth="0.55" opacity="0.45" fill="none" strokeLinecap="round">
+            <path d="M34 30 Q50 27.5 66 30" />
+            <path d="M34 34 Q50 31.5 66 34" />
+            <path d="M34 38 Q50 35.5 66 38" />
           </g>
-          {/* highlight on knot */}
-          <ellipse cx="36" cy="28" rx="5" ry="2.5" fill="rgba(255,235,200,0.35)" />
+          {/* small tail tuft below knot */}
+          <path d="M46 46 Q50 52 54 46" stroke="url(#strandTwist)" strokeWidth="6" fill="none" strokeLinecap="round" />
         </svg>
-        <div className="relative overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
-          {/* metal grommet where the knot ties through the card */}
-          <div aria-hidden className="orb-grommet" />
+        <div className="relative overflow-visible rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
           <button
             type="button"
             aria-label="Close"
