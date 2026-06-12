@@ -825,13 +825,49 @@ function Why({ onOpen }: { onOpen: () => void }) {
   );
 }
 
-function Footer() {
+function Footer({ onOpen }: { onOpen: () => void }) {
   return (
-    <footer className="mx-auto max-w-6xl border-t border-border px-5 py-7">
-      <div className="flex flex-wrap items-center justify-between gap-3 text-[12px] text-muted-foreground sm:text-sm">
-        <span>© {new Date().getFullYear()} Orbies</span>
-        <span>Made with care in Jaipur.</span>
+    <footer className="mx-auto max-w-6xl px-3 pb-6 sm:px-5">
+      <div className="relative overflow-hidden rounded-[28px] bg-[#0b0b0b] px-7 py-12 text-white sm:px-14 sm:py-16">
+        <div className="grid gap-12 sm:grid-cols-2 sm:items-start">
+          <div>
+            <h2 className="font-serif-display text-[40px] leading-[1.05] tracking-[-0.01em] sm:text-[56px]">
+              Start your next
+              <br />
+              <em className="italic">great adventure.</em>
+            </h2>
+            <button
+              onClick={onOpen}
+              className="mt-10 inline-flex items-center justify-center rounded-full bg-[#f5efe6] px-8 py-4 text-sm font-semibold text-black transition hover:scale-[1.02]"
+              style={{ boxShadow: "0 12px 36px -10px rgba(245,239,230,0.45)" }}
+            >
+              Download Orbies
+            </button>
+          </div>
+          <div className="grid grid-cols-2 gap-8 text-sm sm:justify-self-end">
+            <div>
+              <div className="mb-4 text-white/50">Resources</div>
+              <ul className="space-y-3">
+                <li><a href="#" className="hover:text-white/80">Feature</a></li>
+                <li><a href="#" className="hover:text-white/80">Download</a></li>
+                <li><a href="#" className="hover:text-white/80">About</a></li>
+              </ul>
+            </div>
+            <div>
+              <div className="mb-4 text-white/50">Support</div>
+              <ul className="space-y-3">
+                <li><a href="#" className="hover:text-white/80">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-white/80">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white/80">Support</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="mt-14 text-xs text-white/50">
+          © Copyright {new Date().getFullYear()}. All Rights Reserved.
+        </div>
       </div>
     </footer>
   );
 }
+
