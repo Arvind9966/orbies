@@ -312,8 +312,8 @@ function WaitlistDialog({
         <DialogDescription className="sr-only">
           Sign up to discover events, communities and people near you.
         </DialogDescription>
-        <div aria-hidden className="orb-rope" />
         <div className="orb-swing">
+        <div aria-hidden className="orb-rope" />
         <div className="overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
           {step === 1 && (
             <>
