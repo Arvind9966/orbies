@@ -467,8 +467,20 @@ function WaitlistDialog({
           }
           .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
         `}</style>
-            </div>
-          </div>
+      </>
+    </div>
+  );
+
+  return (
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogContent className="sm:max-w-[640px] p-0 overflow-hidden border-0 bg-transparent shadow-none">
+        <div className="relative h-[640px] w-full">
+          <Lanyard
+            position={[0, 0, 13]}
+            gravity={[0, -40, 0]}
+            transparent
+            cardChildren={formContent}
+          />
         </div>
       </DialogContent>
     </Dialog>
