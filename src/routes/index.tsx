@@ -479,15 +479,15 @@ function WaitlistDialog({
             .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
             @keyframes orb-drop {
               0%   { transform: translateY(-130vh) rotate(0deg); }
-              50%  { transform: translateY(2vh)   rotate(-5deg); }
-              68%  { transform: translateY(-1vh)  rotate(3.5deg); }
-              82%  { transform: translateY(0.4vh) rotate(-2deg); }
-              92%  { transform: translateY(0)     rotate(1deg); }
+              50%  { transform: translateY(2vh)   rotate(-2.2deg); }
+              68%  { transform: translateY(-1vh)  rotate(1.6deg); }
+              82%  { transform: translateY(0.4vh) rotate(-0.9deg); }
+              92%  { transform: translateY(0)     rotate(0.4deg); }
               100% { transform: translateY(0)     rotate(0deg); }
             }
             @keyframes orb-sway {
-              0%, 100% { transform: rotate(-1.6deg); }
-              50%      { transform: rotate(1.6deg); }
+              0%, 100% { transform: rotate(-0.8deg); }
+              50%      { transform: rotate(0.8deg); }
             }
             /* Rope grows in, then gently stretches/contracts with the swing for a gravity feel */
             @keyframes orb-rope-grow {
