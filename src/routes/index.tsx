@@ -254,7 +254,7 @@ function WaitlistDialog({
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [city, setCity] = useState("");
-  const [interest, setInterest] = useState<string>("");
+  const [interests, setInterests] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   function reset() {
@@ -262,7 +262,7 @@ function WaitlistDialog({
     setName("");
     setMobile("");
     setCity("");
-    setInterest("");
+    setInterests([]);
     setLoading(false);
   }
 
@@ -280,9 +280,15 @@ function WaitlistDialog({
     setStep(2);
   }
 
+  function toggleInterest(opt: string) {
+    setInterests((prev) =>
+      prev.includes(opt) ? prev.filter((i) => i !== opt) : [...prev, opt],
+    );
+  }
+
   async function submit() {
-    if (!interest) {
-      toast.error("Pick what you're looking for");
+    if (interests.length === 0) {
+      toast.error("Pick at least one thing you're looking for");
       return;
     }
     setLoading(true);
@@ -290,7 +296,7 @@ function WaitlistDialog({
       name: name.trim(),
       mobile: mobile.trim(),
       city: city.trim(),
-      interest,
+      interest: interests.join(", "),
     };
     const { error } = await supabase.from("waitlist_signups").insert(payload);
     setLoading(false);
@@ -298,7 +304,7 @@ function WaitlistDialog({
       toast.error("Something went wrong. Please try again.");
       return;
     }
-    // Fire-and-forget mirror to Google Sheet — never block the user.
+    // Fire-and-forget mirror to Google Sheet, never block the user.
     appendSignupToSheet({ data: payload }).catch((e) =>
       console.error("Sheet append failed:", e),
     );
@@ -428,20 +434,21 @@ function WaitlistDialog({
             <>
               <div className="space-y-1.5">
                 <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">
-                  What do you want to see first?
+                  What are you into?
                 </h2>
                 <p className="text-sm text-muted-foreground">
-                  Pick one — we'll open your feed with this on top.
+                  Pick a few. We'll line your feed up with these first.
                 </p>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
                 {INTERESTS.map((opt) => {
-                  const active = interest === opt;
+                  const active = interests.includes(opt);
                   return (
                     <button
                       type="button"
                       key={opt}
-                      onClick={() => setInterest(opt)}
+                      onClick={() => toggleInterest(opt)}
+                      aria-pressed={active}
                       className={
                         "rounded-full border px-3.5 py-1.5 text-sm transition " +
                         (active
@@ -487,12 +494,12 @@ function WaitlistDialog({
                 <CheckCircle2 className="h-7 w-7" />
               </div>
               <h3 className="mt-5 font-display text-2xl font-semibold">
-                You're in, {name.split(" ")[0] || "friend"} 🎉
+                {name.trim() ? `Welcome in, ${name.trim().split(" ")[0]}` : "You're in"} 🎉
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                We're loading {interest ? interest.toLowerCase() : "things"} happening
-                around {city || "you"} right now. Your feed will be ready in a few
-                moments — we'll text you on {mobile ? mobile : "your number"} the
+                We're tuning your feed to the best happenings around
+                {" "}{city.trim() || "your city"} right now. It'll be ready in a
+                moment, and we'll ping you on {mobile.trim() || "your number"} the
                 second it's live.
               </p>
               <button
