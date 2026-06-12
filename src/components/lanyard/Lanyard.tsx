@@ -294,8 +294,8 @@ function Band({
             {cardChildren && (
               <Html
                 transform
-                position={[0, 0, 0.02]}
-                scale={0.0095}
+                position={[0, 0, 0.012]}
+                scale={0.0045}
                 pointerEvents="auto"
                 zIndexRange={[100, 0]}
               >
@@ -305,7 +305,7 @@ function Band({
                   onPointerMove={(e) => e.stopPropagation()}
                   style={{
                     width: 360,
-                    height: 510,
+                    height: 506,
                     borderRadius: 18,
                     overflow: 'hidden',
                   }}
