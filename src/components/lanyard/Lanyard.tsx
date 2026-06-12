@@ -291,6 +291,27 @@ function Band({
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+            {cardChildren && (
+              <Html
+                transform
+                occlude="blending"
+                position={[0, 0, 0.025]}
+                scale={0.18}
+                pointerEvents="auto"
+              >
+                <div
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onPointerUp={(e) => e.stopPropagation()}
+                  onPointerMove={(e) => e.stopPropagation()}
+                  style={{
+                    width: 360,
+                    height: 500,
+                  }}
+                >
+                  {cardChildren}
+                </div>
+              </Html>
+            )}
           </group>
         </RigidBody>
       </group>
