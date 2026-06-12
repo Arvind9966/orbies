@@ -39,6 +39,7 @@ type LanyardProps = {
   imageFit?: 'cover' | 'contain';
   lanyardImage?: string | null;
   lanyardWidth?: number;
+  cardChildren?: React.ReactNode;
 };
 
 export default function Lanyard({
@@ -51,6 +52,7 @@ export default function Lanyard({
   imageFit = 'cover',
   lanyardImage = null,
   lanyardWidth = 1,
+  cardChildren = null,
 }: LanyardProps) {
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== 'undefined' && window.innerWidth < 768,
@@ -80,6 +82,7 @@ export default function Lanyard({
             imageFit={imageFit}
             lanyardImage={lanyardImage}
             lanyardWidth={lanyardWidth}
+            cardChildren={cardChildren}
           />
         </Physics>
         <Environment blur={0.75}>
@@ -92,6 +95,8 @@ export default function Lanyard({
     </div>
   );
 }
+
+
 
 type BandProps = {
   maxSpeed?: number;
