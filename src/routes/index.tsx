@@ -117,7 +117,7 @@ function Index() {
       <Hero onOpen={() => setOpen(true)} />
       <Categories />
       <Why onOpen={() => setOpen(true)} />
-      <Footer />
+      <Footer onOpen={() => setOpen(true)} />
       <WaitlistDialog open={open} onOpenChange={setOpen} />
     </div>
   );
@@ -662,7 +662,7 @@ function Field({
 
 function Categories() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-12 lg:py-20">
+    <section className="mx-auto max-w-6xl px-5 pt-12 pb-2 lg:pt-20 lg:pb-4">
       <div className="max-w-2xl">
         <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
           One place
@@ -746,20 +746,19 @@ function Why({ onOpen }: { onOpen: () => void }) {
     },
   ];
   return (
-    <section className="mx-auto max-w-6xl px-5 py-12 lg:py-20">
+    <section className="mx-auto max-w-6xl px-5 pt-2 pb-10 lg:pt-4 lg:pb-16">
       <div
-        className="rounded-3xl border border-border p-6 sm:p-12"
+        className="rounded-3xl p-6 sm:p-12"
         style={{
-          background:
-            "linear-gradient(180deg, oklch(0.99 0.005 250) 0%, oklch(0.96 0.02 250) 100%)",
+          background: "#eab5a5",
           boxShadow: "var(--shadow-soft)",
         }}
       >
         <div className="max-w-2xl">
-          <div className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+          <div className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-black/70">
             The city is alive
           </div>
-          <h2 className="mt-3 font-display text-[26px] font-bold tracking-[-0.03em] sm:text-4xl">
+          <h2 className="mt-3 font-display text-[26px] font-bold tracking-[-0.03em] text-black sm:text-4xl">
             You're just missing most of it.
           </h2>
         </div>
@@ -770,7 +769,7 @@ function Why({ onOpen }: { onOpen: () => void }) {
               <div className="w-full max-w-xl text-center">
                 <div
                   className={`font-display text-[12px] font-semibold uppercase tracking-[0.16em] ${
-                    step.final ? "text-primary" : "text-muted-foreground"
+                    step.final ? "text-black" : "text-black/60"
                   }`}
                 >
                   {step.label}
@@ -792,8 +791,7 @@ function Why({ onOpen }: { onOpen: () => void }) {
                     ) : (
                       <span
                         key={c}
-                        className="rounded-full border border-border bg-card px-3.5 py-1.5 text-[13px] text-foreground/80 sm:text-[14px]"
-                        style={{ boxShadow: "var(--shadow-soft)" }}
+                        className="rounded-full bg-white/70 px-3.5 py-1.5 text-[13px] text-black/80 sm:text-[14px]"
                       >
                         {c}
                       </span>
@@ -807,7 +805,7 @@ function Why({ onOpen }: { onOpen: () => void }) {
                   height="22"
                   viewBox="0 0 14 22"
                   fill="none"
-                  className="text-primary/50"
+                  className="text-black/40"
                   aria-hidden
                 >
                   <path
@@ -827,13 +825,49 @@ function Why({ onOpen }: { onOpen: () => void }) {
   );
 }
 
-function Footer() {
+function Footer({ onOpen }: { onOpen: () => void }) {
   return (
-    <footer className="mx-auto max-w-6xl border-t border-border px-5 py-7">
-      <div className="flex flex-wrap items-center justify-between gap-3 text-[12px] text-muted-foreground sm:text-sm">
-        <span>© {new Date().getFullYear()} Orbies</span>
-        <span>Made with care in Jaipur.</span>
+    <footer className="mx-auto max-w-6xl px-3 pb-6 sm:px-5">
+      <div className="relative overflow-hidden rounded-[28px] bg-[#0b0b0b] px-7 py-12 text-white sm:px-14 sm:py-16">
+        <div className="grid gap-12 sm:grid-cols-2 sm:items-start">
+          <div>
+            <h2 className="font-serif-display text-[40px] leading-[1.05] tracking-[-0.01em] sm:text-[56px]">
+              Start your next
+              <br />
+              <em className="italic">great adventure.</em>
+            </h2>
+            <button
+              onClick={onOpen}
+              className="mt-10 inline-flex items-center justify-center rounded-full bg-[#f5efe6] px-8 py-4 text-sm font-semibold text-black transition hover:scale-[1.02]"
+              style={{ boxShadow: "0 12px 36px -10px rgba(245,239,230,0.45)" }}
+            >
+              Download Orbies
+            </button>
+          </div>
+          <div className="grid grid-cols-2 gap-8 text-sm sm:justify-self-end">
+            <div>
+              <div className="mb-4 text-white/50">Resources</div>
+              <ul className="space-y-3">
+                <li><a href="#" className="hover:text-white/80">Feature</a></li>
+                <li><a href="#" className="hover:text-white/80">Download</a></li>
+                <li><a href="#" className="hover:text-white/80">About</a></li>
+              </ul>
+            </div>
+            <div>
+              <div className="mb-4 text-white/50">Support</div>
+              <ul className="space-y-3">
+                <li><a href="#" className="hover:text-white/80">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-white/80">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white/80">Support</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="mt-14 text-xs text-white/50">
+          © Copyright {new Date().getFullYear()}. All Rights Reserved.
+        </div>
       </div>
     </footer>
   );
 }
+
