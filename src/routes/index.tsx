@@ -254,7 +254,7 @@ function WaitlistDialog({
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [city, setCity] = useState("");
-  const [interest, setInterest] = useState<string>("");
+  const [interests, setInterests] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   function reset() {
@@ -262,7 +262,7 @@ function WaitlistDialog({
     setName("");
     setMobile("");
     setCity("");
-    setInterest("");
+    setInterests([]);
     setLoading(false);
   }
 
@@ -280,9 +280,15 @@ function WaitlistDialog({
     setStep(2);
   }
 
+  function toggleInterest(opt: string) {
+    setInterests((prev) =>
+      prev.includes(opt) ? prev.filter((i) => i !== opt) : [...prev, opt],
+    );
+  }
+
   async function submit() {
-    if (!interest) {
-      toast.error("Pick what you're looking for");
+    if (interests.length === 0) {
+      toast.error("Pick at least one thing you're looking for");
       return;
     }
     setLoading(true);
@@ -290,7 +296,7 @@ function WaitlistDialog({
       name: name.trim(),
       mobile: mobile.trim(),
       city: city.trim(),
-      interest,
+      interest: interests.join(", "),
     };
     const { error } = await supabase.from("waitlist_signups").insert(payload);
     setLoading(false);
@@ -298,7 +304,7 @@ function WaitlistDialog({
       toast.error("Something went wrong. Please try again.");
       return;
     }
-    // Fire-and-forget mirror to Google Sheet — never block the user.
+    // Fire-and-forget mirror to Google Sheet, never block the user.
     appendSignupToSheet({ data: payload }).catch((e) =>
       console.error("Sheet append failed:", e),
     );
