@@ -746,20 +746,19 @@ function Why({ onOpen }: { onOpen: () => void }) {
     },
   ];
   return (
-    <section className="mx-auto max-w-6xl px-5 py-12 lg:py-20">
+    <section className="mx-auto max-w-6xl px-5 pt-2 pb-10 lg:pt-4 lg:pb-16">
       <div
-        className="rounded-3xl border border-border p-6 sm:p-12"
+        className="rounded-3xl p-6 sm:p-12"
         style={{
-          background:
-            "linear-gradient(180deg, oklch(0.99 0.005 250) 0%, oklch(0.96 0.02 250) 100%)",
+          background: "#eab5a5",
           boxShadow: "var(--shadow-soft)",
         }}
       >
         <div className="max-w-2xl">
-          <div className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+          <div className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-black/70">
             The city is alive
           </div>
-          <h2 className="mt-3 font-display text-[26px] font-bold tracking-[-0.03em] sm:text-4xl">
+          <h2 className="mt-3 font-display text-[26px] font-bold tracking-[-0.03em] text-black sm:text-4xl">
             You're just missing most of it.
           </h2>
         </div>
@@ -770,7 +769,7 @@ function Why({ onOpen }: { onOpen: () => void }) {
               <div className="w-full max-w-xl text-center">
                 <div
                   className={`font-display text-[12px] font-semibold uppercase tracking-[0.16em] ${
-                    step.final ? "text-primary" : "text-muted-foreground"
+                    step.final ? "text-black" : "text-black/60"
                   }`}
                 >
                   {step.label}
@@ -792,8 +791,7 @@ function Why({ onOpen }: { onOpen: () => void }) {
                     ) : (
                       <span
                         key={c}
-                        className="rounded-full border border-border bg-card px-3.5 py-1.5 text-[13px] text-foreground/80 sm:text-[14px]"
-                        style={{ boxShadow: "var(--shadow-soft)" }}
+                        className="rounded-full bg-white/70 px-3.5 py-1.5 text-[13px] text-black/80 sm:text-[14px]"
                       >
                         {c}
                       </span>
@@ -807,7 +805,7 @@ function Why({ onOpen }: { onOpen: () => void }) {
                   height="22"
                   viewBox="0 0 14 22"
                   fill="none"
-                  className="text-primary/50"
+                  className="text-black/40"
                   aria-hidden
                 >
                   <path
