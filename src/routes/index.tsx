@@ -777,24 +777,27 @@ function Why({ onOpen }: { onOpen: () => void }) {
                 </div>
                 <div className="mt-3 flex flex-wrap justify-center gap-2 sm:gap-2.5">
                   {step.chips.map((c) => (
-                    <span
-                      key={c}
-                      className={
-                        step.final
-                          ? "rounded-full px-4 py-2 text-[14px] font-medium text-primary-foreground sm:text-[15px]"
-                          : "rounded-full border border-border bg-card px-3.5 py-1.5 text-[13px] text-foreground/80 sm:text-[14px]"
-                      }
-                      style={
-                        step.final
-                          ? {
-                              background: "var(--gradient-warm)",
-                              boxShadow: "var(--shadow-glow)",
-                            }
-                          : { boxShadow: "var(--shadow-soft)" }
-                      }
-                    >
-                      {c}
-                    </span>
+                    step.final ? (
+                      <button
+                        key={c}
+                        onClick={onOpen}
+                        className="rounded-full px-4 py-2 text-[14px] font-medium text-primary-foreground transition hover:scale-[1.03] sm:text-[15px] cursor-pointer"
+                        style={{
+                          background: "var(--gradient-warm)",
+                          boxShadow: "var(--shadow-glow)",
+                        }}
+                      >
+                        {c}
+                      </button>
+                    ) : (
+                      <span
+                        key={c}
+                        className="rounded-full border border-border bg-card px-3.5 py-1.5 text-[13px] text-foreground/80 sm:text-[14px]"
+                        style={{ boxShadow: "var(--shadow-soft)" }}
+                      >
+                        {c}
+                      </span>
+                    )
                   ))}
                 </div>
               </div>
