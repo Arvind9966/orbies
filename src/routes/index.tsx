@@ -314,7 +314,48 @@ function WaitlistDialog({
         </DialogDescription>
         <div className="orb-swing">
         <div aria-hidden className="orb-rope" />
+        <svg aria-hidden className="orb-knot" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ropeStrand" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stopColor="#3a2410" />
+              <stop offset="0.25" stopColor="#8b5a2b" />
+              <stop offset="0.5" stopColor="#e7c089" />
+              <stop offset="0.75" stopColor="#8b5a2b" />
+              <stop offset="1" stopColor="#3a2410" />
+            </linearGradient>
+            <pattern id="strandTwist" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+              <rect width="6" height="6" fill="url(#ropeStrand)" />
+              <path d="M0 3 H6" stroke="#2a1808" strokeWidth="0.8" opacity="0.55" />
+              <path d="M0 1 H6" stroke="#fff1d6" strokeWidth="0.5" opacity="0.35" />
+            </pattern>
+          </defs>
+          {/* drop shadow */}
+          <ellipse cx="40" cy="52" rx="26" ry="3" fill="rgba(0,0,0,0.25)" />
+          {/* left loop (back) */}
+          <path d="M40 6 C 18 10, 10 28, 22 42 C 30 50, 42 48, 44 38"
+            stroke="url(#strandTwist)" strokeWidth="11" fill="none" strokeLinecap="round" />
+          {/* right loop (back) */}
+          <path d="M40 6 C 62 10, 70 28, 58 42 C 50 50, 38 48, 36 38"
+            stroke="url(#strandTwist)" strokeWidth="11" fill="none" strokeLinecap="round" />
+          {/* central wrap/knot bulge (front) */}
+          <ellipse cx="40" cy="32" rx="14" ry="11" fill="url(#strandTwist)" />
+          <ellipse cx="40" cy="32" rx="14" ry="11" fill="none" stroke="#2a1808" strokeWidth="0.8" opacity="0.5" />
+          {/* tight wrap lines across central knot */}
+          <g stroke="#2a1808" strokeWidth="0.9" opacity="0.6" fill="none" strokeLinecap="round">
+            <path d="M28 28 Q40 26 52 28" />
+            <path d="M27 32 Q40 30 53 32" />
+            <path d="M28 36 Q40 34 52 36" />
+          </g>
+          <g stroke="#fff1d6" strokeWidth="0.5" opacity="0.4" fill="none" strokeLinecap="round">
+            <path d="M28 30 Q40 28 52 30" />
+            <path d="M28 34 Q40 32 52 34" />
+          </g>
+          {/* highlight on knot */}
+          <ellipse cx="36" cy="28" rx="5" ry="2.5" fill="rgba(255,235,200,0.35)" />
+        </svg>
         <div className="relative overflow-y-auto rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
+          {/* metal grommet where the knot ties through the card */}
+          <div aria-hidden className="orb-grommet" />
           <button
             type="button"
             aria-label="Close"
@@ -568,44 +609,44 @@ function WaitlistDialog({
               background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0) 100%);
               pointer-events: none;
             }
-            .orb-rope::after {
-              /* whipped (tightly wrapped) end binding rope to card */
+            /* SVG knot tying rope to the card */
+            .orb-knot {
+              position: absolute;
+              left: 50%;
+              bottom: -6px;
+              width: 56px;
+              height: 42px;
+              transform: translateX(-50%);
+              z-index: 2;
+              filter: drop-shadow(0 3px 3px rgba(0,0,0,0.35));
+              pointer-events: none;
+              animation: orb-rope-grow 0.6s ease-out both;
+            }
+            /* small grommet/eyelet sunk into the card where the knot threads through */
+            .orb-grommet {
+              position: absolute;
+              left: 50%;
+              top: -7px;
+              width: 18px;
+              height: 14px;
+              transform: translateX(-50%);
+              border-radius: 50%;
+              background:
+                radial-gradient(ellipse at 50% 35%, #1a1a1a 0%, #0a0a0a 60%, #000 100%);
+              box-shadow:
+                inset 0 1px 1px rgba(255,255,255,0.25),
+                inset 0 -1px 2px rgba(0,0,0,0.8),
+                0 1px 2px rgba(0,0,0,0.4);
+              z-index: 1;
+              pointer-events: none;
+            }
+            .orb-grommet::before {
               content: "";
               position: absolute;
-              bottom: -16px;
-              left: 50%;
-              width: 22px;
-              height: 26px;
-              border-radius: 6px 6px 5px 5px / 9px 9px 5px 5px;
-              transform: translateX(-50%);
-              background:
-                /* fine twine wrap lines */
-                repeating-linear-gradient(0deg,
-                  rgba(0,0,0,0.55) 0 0.6px,
-                  rgba(255,220,170,0.08) 0.6px 1.6px,
-                  rgba(0,0,0,0.35) 1.6px 2px,
-                  transparent 2px 2.4px),
-                /* subtle vertical sheen across the cylinder */
-                linear-gradient(90deg,
-                  rgba(0,0,0,0.55) 0%,
-                  rgba(255,220,170,0.18) 35%,
-                  rgba(255,220,170,0.28) 50%,
-                  rgba(255,220,170,0.10) 70%,
-                  rgba(0,0,0,0.55) 100%),
-                /* base tar/wax color */
-                linear-gradient(180deg, #3a2410 0%, #1a0f06 60%, #0d0703 100%);
-              background-blend-mode: multiply, screen, normal;
-              box-shadow:
-                inset 0 1px 1px rgba(0,0,0,0.7),
-                inset 0 -2px 3px rgba(0,0,0,0.7),
-                inset 1px 0 1px rgba(0,0,0,0.5),
-                inset -1px 0 1px rgba(0,0,0,0.5),
-                0 3px 5px rgba(0,0,0,0.45);
-            }
-            /* dark cinch shadow where rope enters the whipping */
-            .orb-rope .orb-cinch,
-            .orb-cinch-top {
-              display: none;
+              inset: 3px 4px;
+              border-radius: 50%;
+              background: #000;
+              box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
             }
           `}</style>
         </div>
