@@ -470,6 +470,8 @@ function WaitlistDialog({
           }
           .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
         `}</style>
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );
