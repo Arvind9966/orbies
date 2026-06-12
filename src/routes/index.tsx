@@ -308,12 +308,14 @@ function WaitlistDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-3xl p-0 overflow-hidden">
-        <div className="grid md:grid-cols-2">
-          <div className="relative h-64 md:h-auto bg-gradient-to-br from-orange-50 via-rose-50 to-amber-50">
-            <Lanyard position={[0, 0, 18]} gravity={[0, -40, 0]} transparent />
+      <DialogContent className="sm:max-w-[560px] p-0 overflow-hidden border-0 bg-transparent shadow-none">
+        <div className="relative h-[640px] w-full">
+          <div className="absolute inset-0">
+            <Lanyard position={[0, 0, 13]} gravity={[0, -40, 0]} transparent />
           </div>
-          <div className="p-6 sm:p-8">
+          <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-6">
+            <div className="pointer-events-auto w-[88%] max-w-[360px] rounded-2xl bg-white/85 backdrop-blur-xl shadow-2xl ring-1 ring-black/5 p-5 animate-fade-in" style={{ animationDelay: "0.6s", animationFillMode: "both" }}>
+
         {step === 1 && (
           <>
 
@@ -470,6 +472,7 @@ function WaitlistDialog({
           }
           .orb-input::placeholder { color: oklch(0.55 0.03 50 / 0.7); }
         `}</style>
+            </div>
           </div>
         </div>
       </DialogContent>
