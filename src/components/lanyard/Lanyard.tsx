@@ -114,12 +114,12 @@ function Band({
   lanyardImage = null,
   lanyardWidth = 1,
 }: BandProps) {
-  const band = useRef<any>(),
-    fixed = useRef<any>(),
-    j1 = useRef<any>(),
-    j2 = useRef<any>(),
-    j3 = useRef<any>(),
-    card = useRef<any>();
+  const band = useRef<any>(null),
+    fixed = useRef<any>(null),
+    j1 = useRef<any>(null),
+    j2 = useRef<any>(null),
+    j3 = useRef<any>(null),
+    card = useRef<any>(null);
   const vec = new THREE.Vector3(),
     ang = new THREE.Vector3(),
     rot = new THREE.Vector3(),
