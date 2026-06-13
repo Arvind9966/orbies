@@ -21,7 +21,10 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import orbiesLogo from "@/assets/orbies-logo-transparent.png.asset.json";
+import orbiesLogoAsset from "@/assets/orbies-logo-transparent.png.asset.json";
+// Use the bundled public/ copy so the logo also resolves on third-party hosts
+// (Vercel etc.) where the Lovable /__l5e/assets-v1/* CDN path doesn't exist.
+const orbiesLogo = { url: "/orbies-logo.png", _asset: orbiesLogoAsset };
 import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 
 
