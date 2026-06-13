@@ -12,7 +12,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { appendSignupToSheet } from "@/lib/sheet.functions";
+
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import {
@@ -308,9 +308,12 @@ function WaitlistDialog({
       return;
     }
     // Fire-and-forget mirror to Google Sheet, never block the user.
-    appendSignupToSheet({ data: payload }).catch((e) =>
-      console.error("Sheet append failed:", e),
-    );
+    fetch("/api/append-signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch((e) => console.error("Sheet append failed:", e));
     setStep(3);
   }
 
