@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
   Cell,
+  LabelList,
 } from "recharts";
 
 export const Route = createFileRoute("/admin")({
