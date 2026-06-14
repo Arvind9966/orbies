@@ -82,6 +82,7 @@ function AdminPage() {
   }, [rows]);
 
   const totalRespondents = rows.length;
+  const maxCount = interestData[0]?.count ?? 0;
   const topInterest = interestData[0];
 
   const downloadExcel = () => {
