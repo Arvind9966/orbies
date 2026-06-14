@@ -33,6 +33,17 @@ type Signup = {
   interest: string;
 };
 
+const ALL_INTERESTS = [
+  "Events",
+  "Trips",
+  "Communities",
+  "Networking",
+  "Meet New People",
+  "Volunteering",
+  "Startup Opportunities",
+  "Sports & Fitness",
+];
+
 const COLORS = ["#6366f1", "#22c55e", "#f59e0b", "#ec4899", "#06b6d4", "#a855f7", "#ef4444", "#84cc16"];
 
 function AdminPage() {
