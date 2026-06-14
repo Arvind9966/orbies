@@ -1,32 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
-import {
-  Calendar,
-  Users,
-  Mountain,
-  HeartHandshake,
-  Sparkles,
-  ArrowRight,
-  CheckCircle2,
-  MapPin,
-} from "lucide-react";
+import { Calendar, Users, Mountain, HeartHandshake, Sparkles, ArrowRight, CheckCircle2, MapPin } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import orbiesLogoAsset from "@/assets/orbies-logo-transparent.png.asset.json";
 // Use the bundled public/ copy so the logo also resolves on third-party hosts
 // (Vercel etc.) where the Lovable /__l5e/assets-v1/* CDN path doesn't exist.
 const orbiesLogo = { url: "/orbies-logo.png", _asset: orbiesLogoAsset };
 import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
-
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -116,7 +101,7 @@ function Index() {
   return (
     <div className="min-h-screen">
       <Toaster richColors position="top-center" />
-      
+
       <Hero onOpen={() => setOpen(true)} />
       <Categories />
       <Why onOpen={() => setOpen(true)} />
@@ -136,7 +121,7 @@ function Nav({ onOpen }: { onOpen: () => void }) {
         onClick={onOpen}
         className="rounded-full bg-black px-5 py-2 text-xs font-medium text-white transition-transform hover:scale-[1.03] sm:px-6 sm:py-2.5 sm:text-sm"
       >
-        Log in to explore
+        Join to explore
       </button>
     </nav>
   );
@@ -193,19 +178,14 @@ function Hero({ onOpen }: { onOpen: () => void }) {
     <div className="relative min-h-screen w-full overflow-hidden bg-white md:min-h-0">
       <VideoBackground />
       <Nav onOpen={onOpen} />
-      <section
-        className="relative z-10 flex flex-col items-start justify-start px-6 py-12 text-left sm:py-16 md:items-center md:text-center md:py-20"
-      >
+      <section className="relative z-10 flex flex-col items-start justify-start px-6 py-12 text-left sm:py-16 md:items-center md:text-center md:py-20">
         <span className="animate-fade-rise inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3 py-1 text-[11px] font-medium text-muted-foreground backdrop-blur md:self-center">
           <span className="relative flex h-1.5 w-1.5">
             <span
               className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
               style={{ background: "var(--azure)" }}
             />
-            <span
-              className="relative inline-flex h-1.5 w-1.5 rounded-full"
-              style={{ background: "var(--azure)" }}
-            />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "var(--azure)" }} />
           </span>
           Now live in Jaipur
         </span>
@@ -220,10 +200,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           }}
         >
           Discover{" "}
-          <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: "var(--gradient-warm)" }}
-          >
+          <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-warm)" }}>
             What's Happening
           </span>{" "}
           Around You
@@ -232,7 +209,8 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           className="animate-fade-rise-delay mt-8 max-w-4xl text-base leading-relaxed sm:text-lg line-clamp-2 md:mx-auto md:max-w-2xl md:mt-3"
           style={{ color: "#6F6F6F" }}
         >
-          Find events, communities, trips, volunteering opportunities and like-minded people in Jaipur — all in one place.
+          Find events, communities, trips, volunteering opportunities and like-minded people in Jaipur — all in one
+          place.
         </p>
         <button
           onClick={onOpen}
@@ -246,13 +224,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
   );
 }
 
-function WaitlistDialog({
-  open,
-  onOpenChange,
-}: {
-  open: boolean;
-  onOpenChange: (v: boolean) => void;
-}) {
+function WaitlistDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
@@ -284,9 +256,7 @@ function WaitlistDialog({
   }
 
   function toggleInterest(opt: string) {
-    setInterests((prev) =>
-      prev.includes(opt) ? prev.filter((i) => i !== opt) : [...prev, opt],
-    );
+    setInterests((prev) => (prev.includes(opt) ? prev.filter((i) => i !== opt) : [...prev, opt]));
   }
 
   async function submit() {
@@ -325,203 +295,231 @@ function WaitlistDialog({
           Sign up to discover events, communities and people near you.
         </DialogDescription>
         <div className="orb-swing">
-        <div aria-hidden className="orb-rope" />
-        <svg aria-hidden className="orb-knot" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="ropeStrandV" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stopColor="#3a2410" />
-              <stop offset="0.22" stopColor="#7a4f24" />
-              <stop offset="0.5" stopColor="#e7c089" />
-              <stop offset="0.78" stopColor="#7a4f24" />
-              <stop offset="1" stopColor="#3a2410" />
-            </linearGradient>
-            <pattern id="strandTwist" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
-              <rect width="7" height="7" fill="url(#ropeStrandV)" />
-              <path d="M0 3.5 H7" stroke="#2a1808" strokeWidth="0.9" opacity="0.55" />
-              <path d="M0 1.2 H7" stroke="#fff1d6" strokeWidth="0.5" opacity="0.35" />
-            </pattern>
-            <radialGradient id="bulgeShade" cx="0.4" cy="0.35" r="0.7">
-              <stop offset="0" stopColor="rgba(255,235,200,0.45)" />
-              <stop offset="0.6" stopColor="rgba(0,0,0,0)" />
-              <stop offset="1" stopColor="rgba(0,0,0,0.45)" />
-            </radialGradient>
-          </defs>
-          {/* soft cast shadow on card */}
-          <ellipse cx="50" cy="62" rx="30" ry="3.5" fill="rgba(0,0,0,0.28)" />
-          {/* symmetric back loops emerging from behind the central knot */}
-          <path d="M50 4 C 22 8, 10 30, 26 48 C 34 56, 46 52, 50 42"
-            stroke="url(#strandTwist)" strokeWidth="12" fill="none" strokeLinecap="round" />
-          <path d="M50 4 C 78 8, 90 30, 74 48 C 66 56, 54 52, 50 42"
-            stroke="url(#strandTwist)" strokeWidth="12" fill="none" strokeLinecap="round" />
-          {/* dark cinch where rope enters the knot */}
-          <ellipse cx="50" cy="10" rx="9" ry="3" fill="rgba(0,0,0,0.45)" />
-          {/* central knot bulge (front) */}
-          <ellipse cx="50" cy="34" rx="18" ry="13" fill="url(#strandTwist)" />
-          <ellipse cx="50" cy="34" rx="18" ry="13" fill="url(#bulgeShade)" />
-          <ellipse cx="50" cy="34" rx="18" ry="13" fill="none" stroke="#2a1808" strokeWidth="0.8" opacity="0.55" />
-          {/* tight horizontal wrap lines across central knot */}
-          <g stroke="#2a1808" strokeWidth="1" opacity="0.6" fill="none" strokeLinecap="round">
-            <path d="M34 28 Q50 25.5 66 28" />
-            <path d="M33 32 Q50 29.5 67 32" />
-            <path d="M33 36 Q50 33.5 67 36" />
-            <path d="M34 40 Q50 37.5 66 40" />
-          </g>
-          <g stroke="#fff1d6" strokeWidth="0.55" opacity="0.45" fill="none" strokeLinecap="round">
-            <path d="M34 30 Q50 27.5 66 30" />
-            <path d="M34 34 Q50 31.5 66 34" />
-            <path d="M34 38 Q50 35.5 66 38" />
-          </g>
-          {/* small tail tuft below knot */}
-          <path d="M46 46 Q50 52 54 46" stroke="url(#strandTwist)" strokeWidth="6" fill="none" strokeLinecap="round" />
-        </svg>
-        <div className="relative overflow-visible rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
-          <button
-            type="button"
-            aria-label="Close"
-            onClick={() => handleOpenChange(false)}
-            className="absolute right-3 top-3 z-30 grid h-8 w-8 place-items-center rounded-full bg-black/5 text-foreground/70 transition hover:bg-black/10 hover:text-foreground"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-          </button>
-          {step === 1 && (
-            <>
-              <div className="space-y-1.5">
-                <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">Log in to Orbies</h2>
-                <p className="text-sm text-muted-foreground">
-                  Quick login so we can show you what's happening near you tonight.
-                </p>
-              </div>
-              <div className="mt-2 space-y-4">
-                <Field label="Name">
-                  <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Aarav Sharma"
-                    maxLength={100}
-                    className="orb-input"
-                    autoFocus
-                  />
-                </Field>
-                <Field label="Mobile number">
-                  <input
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                    placeholder="+91 98xxxxxx00"
-                    maxLength={20}
-                    inputMode="tel"
-                    className="orb-input"
-                  />
-                </Field>
-                <Field label="City">
-                  <input
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="Jaipur"
-                    maxLength={100}
-                    className="orb-input"
-                  />
-                </Field>
-              </div>
-              <button
-                onClick={next}
-                className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold text-primary-foreground transition hover:brightness-105"
-                style={{
-                  background: "var(--gradient-warm)",
-                  boxShadow: "var(--shadow-glow)",
-                }}
+          <div aria-hidden className="orb-rope" />
+          <svg aria-hidden className="orb-knot" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ropeStrandV" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stopColor="#3a2410" />
+                <stop offset="0.22" stopColor="#7a4f24" />
+                <stop offset="0.5" stopColor="#e7c089" />
+                <stop offset="0.78" stopColor="#7a4f24" />
+                <stop offset="1" stopColor="#3a2410" />
+              </linearGradient>
+              <pattern
+                id="strandTwist"
+                width="7"
+                height="7"
+                patternUnits="userSpaceOnUse"
+                patternTransform="rotate(38)"
               >
-                Next
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-              </button>
-            </>
-          )}
-
-          {step === 2 && (
-            <>
-              <div className="space-y-1.5">
-                <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">
-                  What are you into?
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  Pick a few. We'll line your feed up with these first.
-                </p>
-              </div>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {INTERESTS.map((opt) => {
-                  const active = interests.includes(opt);
-                  return (
-                    <button
-                      type="button"
-                      key={opt}
-                      onClick={() => toggleInterest(opt)}
-                      aria-pressed={active}
-                      className={
-                        "rounded-full border px-3.5 py-1.5 text-sm transition " +
-                        (active
-                          ? "border-transparent text-primary-foreground"
-                          : "border-border bg-background text-foreground/80 hover:border-foreground/30")
-                      }
-                      style={active ? { background: "var(--gradient-warm)" } : undefined}
-                    >
-                      {opt}
-                    </button>
-                  );
-                })}
-              </div>
-              <div className="mt-6 flex items-center gap-3">
+                <rect width="7" height="7" fill="url(#ropeStrandV)" />
+                <path d="M0 3.5 H7" stroke="#2a1808" strokeWidth="0.9" opacity="0.55" />
+                <path d="M0 1.2 H7" stroke="#fff1d6" strokeWidth="0.5" opacity="0.35" />
+              </pattern>
+              <radialGradient id="bulgeShade" cx="0.4" cy="0.35" r="0.7">
+                <stop offset="0" stopColor="rgba(255,235,200,0.45)" />
+                <stop offset="0.6" stopColor="rgba(0,0,0,0)" />
+                <stop offset="1" stopColor="rgba(0,0,0,0.45)" />
+              </radialGradient>
+            </defs>
+            {/* soft cast shadow on card */}
+            <ellipse cx="50" cy="62" rx="30" ry="3.5" fill="rgba(0,0,0,0.28)" />
+            {/* symmetric back loops emerging from behind the central knot */}
+            <path
+              d="M50 4 C 22 8, 10 30, 26 48 C 34 56, 46 52, 50 42"
+              stroke="url(#strandTwist)"
+              strokeWidth="12"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <path
+              d="M50 4 C 78 8, 90 30, 74 48 C 66 56, 54 52, 50 42"
+              stroke="url(#strandTwist)"
+              strokeWidth="12"
+              fill="none"
+              strokeLinecap="round"
+            />
+            {/* dark cinch where rope enters the knot */}
+            <ellipse cx="50" cy="10" rx="9" ry="3" fill="rgba(0,0,0,0.45)" />
+            {/* central knot bulge (front) */}
+            <ellipse cx="50" cy="34" rx="18" ry="13" fill="url(#strandTwist)" />
+            <ellipse cx="50" cy="34" rx="18" ry="13" fill="url(#bulgeShade)" />
+            <ellipse cx="50" cy="34" rx="18" ry="13" fill="none" stroke="#2a1808" strokeWidth="0.8" opacity="0.55" />
+            {/* tight horizontal wrap lines across central knot */}
+            <g stroke="#2a1808" strokeWidth="1" opacity="0.6" fill="none" strokeLinecap="round">
+              <path d="M34 28 Q50 25.5 66 28" />
+              <path d="M33 32 Q50 29.5 67 32" />
+              <path d="M33 36 Q50 33.5 67 36" />
+              <path d="M34 40 Q50 37.5 66 40" />
+            </g>
+            <g stroke="#fff1d6" strokeWidth="0.55" opacity="0.45" fill="none" strokeLinecap="round">
+              <path d="M34 30 Q50 27.5 66 30" />
+              <path d="M34 34 Q50 31.5 66 34" />
+              <path d="M34 38 Q50 35.5 66 38" />
+            </g>
+            {/* small tail tuft below knot */}
+            <path
+              d="M46 46 Q50 52 54 46"
+              stroke="url(#strandTwist)"
+              strokeWidth="6"
+              fill="none"
+              strokeLinecap="round"
+            />
+          </svg>
+          <div className="relative overflow-visible rounded-[18px] bg-white/95 p-5 text-foreground shadow-xl">
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={() => handleOpenChange(false)}
+              className="absolute right-3 top-3 z-30 grid h-8 w-8 place-items-center rounded-full bg-black/5 text-foreground/70 transition hover:bg-black/10 hover:text-foreground"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            </button>
+            {step === 1 && (
+              <>
+                <div className="space-y-1.5">
+                  <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">Log in to Orbies</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Quick login so we can show you what's happening near you tonight.
+                  </p>
+                </div>
+                <div className="mt-2 space-y-4">
+                  <Field label="Name">
+                    <input
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Aarav Sharma"
+                      maxLength={100}
+                      className="orb-input"
+                      autoFocus
+                    />
+                  </Field>
+                  <Field label="Mobile number">
+                    <input
+                      value={mobile}
+                      onChange={(e) => setMobile(e.target.value)}
+                      placeholder="+91 98xxxxxx00"
+                      maxLength={20}
+                      inputMode="tel"
+                      className="orb-input"
+                    />
+                  </Field>
+                  <Field label="City">
+                    <input
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      placeholder="Jaipur"
+                      maxLength={100}
+                      className="orb-input"
+                    />
+                  </Field>
+                </div>
                 <button
-                  onClick={() => setStep(1)}
-                  className="rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground/80 transition hover:border-foreground/40"
-                >
-                  Back
-                </button>
-                <button
-                  onClick={submit}
-                  disabled={loading}
-                  className="group inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-105 disabled:opacity-70"
+                  onClick={next}
+                  className="group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold text-primary-foreground transition hover:brightness-105"
                   style={{
                     background: "var(--gradient-warm)",
                     boxShadow: "var(--shadow-glow)",
                   }}
                 >
-                  {loading ? "Logging in…" : "Take me in"}
+                  Next
                   <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                 </button>
-              </div>
-            </>
-          )}
+              </>
+            )}
 
-          {step === 3 && (
-            <div className="py-4 text-center">
-              <div
-                className="mx-auto grid h-14 w-14 place-items-center rounded-full text-primary-foreground"
-                style={{ background: "var(--gradient-warm)" }}
-              >
-                <CheckCircle2 className="h-7 w-7" />
-              </div>
-              <h3 className="mt-5 font-display text-2xl font-semibold">
-                {name.trim() ? `Welcome in, ${name.trim().split(" ")[0]}` : "You're in"} 🎉
-              </h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                We're tuning your feed to the best happenings around
-                {" "}{city.trim() || "your city"} right now. It'll be ready in a
-                moment, and we'll ping you on {mobile.trim() || "your number"} the
-                second it's live.
-              </p>
-              <button
-                onClick={() => handleOpenChange(false)}
-                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-105"
-                style={{
-                  background: "var(--gradient-warm)",
-                  boxShadow: "var(--shadow-glow)",
-                }}
-              >
-                Got it
-              </button>
-            </div>
-          )}
+            {step === 2 && (
+              <>
+                <div className="space-y-1.5">
+                  <h2 className="font-display text-2xl font-semibold leading-none tracking-tight">
+                    What are you into?
+                  </h2>
+                  <p className="text-sm text-muted-foreground">Pick a few. We'll line your feed up with these first.</p>
+                </div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {INTERESTS.map((opt) => {
+                    const active = interests.includes(opt);
+                    return (
+                      <button
+                        type="button"
+                        key={opt}
+                        onClick={() => toggleInterest(opt)}
+                        aria-pressed={active}
+                        className={
+                          "rounded-full border px-3.5 py-1.5 text-sm transition " +
+                          (active
+                            ? "border-transparent text-primary-foreground"
+                            : "border-border bg-background text-foreground/80 hover:border-foreground/30")
+                        }
+                        style={active ? { background: "var(--gradient-warm)" } : undefined}
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-6 flex items-center gap-3">
+                  <button
+                    onClick={() => setStep(1)}
+                    className="rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground/80 transition hover:border-foreground/40"
+                  >
+                    Back
+                  </button>
+                  <button
+                    onClick={submit}
+                    disabled={loading}
+                    className="group inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-105 disabled:opacity-70"
+                    style={{
+                      background: "var(--gradient-warm)",
+                      boxShadow: "var(--shadow-glow)",
+                    }}
+                  >
+                    {loading ? "Logging in…" : "Take me in"}
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                  </button>
+                </div>
+              </>
+            )}
 
-          <style>{`
+            {step === 3 && (
+              <div className="py-4 text-center">
+                <div
+                  className="mx-auto grid h-14 w-14 place-items-center rounded-full text-primary-foreground"
+                  style={{ background: "var(--gradient-warm)" }}
+                >
+                  <CheckCircle2 className="h-7 w-7" />
+                </div>
+                <h3 className="mt-5 font-display text-2xl font-semibold">
+                  {name.trim() ? `Welcome in, ${name.trim().split(" ")[0]}` : "You're in"} 🎉
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  We're tuning your feed to the best happenings around {city.trim() || "your city"} right now. It'll be
+                  ready in a moment, and we'll ping you on {mobile.trim() || "your number"} the second it's live.
+                </p>
+                <button
+                  onClick={() => handleOpenChange(false)}
+                  className="mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-105"
+                  style={{
+                    background: "var(--gradient-warm)",
+                    boxShadow: "var(--shadow-glow)",
+                  }}
+                >
+                  Got it
+                </button>
+              </div>
+            )}
+
+            <style>{`
             .orb-input {
               width: 100%;
               border-radius: 0.75rem;
@@ -644,20 +642,14 @@ function WaitlistDialog({
               animation: orb-rope-grow 0.6s ease-out both;
             }
           `}</style>
-        </div>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
   );
 }
 
-function Field({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
       <label className="text-sm font-medium text-foreground">{label}</label>
@@ -670,15 +662,13 @@ function Categories() {
   return (
     <section className="mx-auto max-w-6xl px-5 pt-12 pb-2 lg:pt-20 lg:pb-4">
       <div className="max-w-2xl">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
-          One place
-        </span>
+        <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">One place</span>
         <h2 className="mt-3 font-display text-[30px] font-bold leading-[1.05] tracking-[-0.03em] sm:text-5xl">
           Everything happening in your city.
         </h2>
         <p className="mt-3 text-[15px] text-muted-foreground sm:text-lg">
-          Stop scrolling through ten WhatsApp groups, three Instagram pages and
-          a Telegram channel. Orbies brings the whole city into one feed.
+          Stop scrolling through ten WhatsApp groups, three Instagram pages and a Telegram channel. Orbies brings the
+          whole city into one feed.
         </p>
       </div>
 
@@ -692,23 +682,11 @@ function Categories() {
           scaleEndPosition="12%"
         >
           {CATEGORIES.map(({ icon: Icon, title, tagline, desc, bg, fg }, i) => (
-            <ScrollStackItem
-              key={title}
-              itemClassName="overflow-hidden border-0"
-            >
-              <div
-                className="absolute inset-0"
-                style={{ background: bg }}
-                aria-hidden
-              />
-              <div
-                className="relative flex h-full flex-col justify-between"
-                style={{ color: fg }}
-              >
+            <ScrollStackItem key={title} itemClassName="overflow-hidden border-0">
+              <div className="absolute inset-0" style={{ background: bg }} aria-hidden />
+              <div className="relative flex h-full flex-col justify-between" style={{ color: fg }}>
                 <div className="flex items-center justify-between">
-                  <span
-                    className="text-[11px] font-semibold uppercase tracking-[0.25em] opacity-80"
-                  >
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.25em] opacity-80">
                     0{i + 1} — {title}
                   </span>
                   <Icon className="h-6 w-6 opacity-90" />
@@ -723,9 +701,7 @@ function Categories() {
                   </p>
                 </div>
 
-                <p className="text-[13px] leading-relaxed opacity-80 sm:text-sm">
-                  {desc}
-                </p>
+                <p className="text-[13px] leading-relaxed opacity-80 sm:text-sm">{desc}</p>
               </div>
             </ScrollStackItem>
           ))}
@@ -781,7 +757,7 @@ function Why({ onOpen }: { onOpen: () => void }) {
                   {step.label}
                 </div>
                 <div className="mt-3 flex flex-wrap justify-center gap-2 sm:gap-2.5">
-                  {step.chips.map((c) => (
+                  {step.chips.map((c) =>
                     step.final ? (
                       <button
                         key={c}
@@ -801,19 +777,12 @@ function Why({ onOpen }: { onOpen: () => void }) {
                       >
                         {c}
                       </span>
-                    )
-                  ))}
+                    ),
+                  )}
                 </div>
               </div>
               {i < steps.length - 1 && (
-                <svg
-                  width="14"
-                  height="22"
-                  viewBox="0 0 14 22"
-                  fill="none"
-                  className="text-black/40"
-                  aria-hidden
-                >
+                <svg width="14" height="22" viewBox="0 0 14 22" fill="none" className="text-black/40" aria-hidden>
                   <path
                     d="M7 1v18m0 0l-5-5m5 5l5-5"
                     stroke="currentColor"
@@ -854,26 +823,47 @@ function Footer({ onOpen }: { onOpen: () => void }) {
             <div>
               <div className="mb-4 text-white/50">Resources</div>
               <ul className="space-y-3">
-                <li><a href="#" className="hover:text-white/80">Feature</a></li>
-                <li><a href="#" className="hover:text-white/80">Download</a></li>
-                <li><a href="#" className="hover:text-white/80">About</a></li>
+                <li>
+                  <a href="#" className="hover:text-white/80">
+                    Feature
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white/80">
+                    Download
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white/80">
+                    About
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <div className="mb-4 text-white/50">Support</div>
               <ul className="space-y-3">
-                <li><a href="#" className="hover:text-white/80">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white/80">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white/80">Support</a></li>
+                <li>
+                  <a href="#" className="hover:text-white/80">
+                    Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white/80">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-white/80">
+                    Support
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="mt-14 text-xs text-white/50">
-          © Copyright {new Date().getFullYear()}. All Rights Reserved.
-        </div>
+        <div className="mt-14 text-xs text-white/50">© Copyright {new Date().getFullYear()}. All Rights Reserved.</div>
       </div>
     </footer>
   );
 }
-
