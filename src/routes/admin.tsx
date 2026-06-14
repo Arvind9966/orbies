@@ -52,17 +52,36 @@ function AdminPage() {
     })();
   }, []);
 
+  const ALL_INTERESTS = [
+    "Events",
+    "Trips",
+    "Communities",
+    "Networking",
+    "Meet New People",
+    "Volunteering",
+    "Startup Opportunities",
+    "Sports & Fitness",
+  ];
+
   const interestData = useMemo(() => {
     const counts = new Map<string, number>();
+    for (const interest of ALL_INTERESTS) {
+      counts.set(interest, 0);
+    }
     for (const r of rows) {
-      const key = (r.interest || "Unknown").trim() || "Unknown";
-      counts.set(key, (counts.get(key) ?? 0) + 1);
+      const parts = (r.interest || "").split(",").map((s) => s.trim());
+      for (const part of parts) {
+        if (counts.has(part)) {
+          counts.set(part, (counts.get(part) ?? 0) + 1);
+        }
+      }
     }
     return Array.from(counts.entries())
       .map(([interest, count]) => ({ interest, count }))
       .sort((a, b) => b.count - a.count);
   }, [rows]);
 
+  const totalRespondents = rows.length;
   const topInterest = interestData[0];
 
   const downloadExcel = () => {
