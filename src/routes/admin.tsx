@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
   Cell,
+  LabelList,
 } from "recharts";
 
 export const Route = createFileRoute("/admin")({
@@ -32,6 +33,17 @@ type Signup = {
   interest: string;
 };
 
+const ALL_INTERESTS = [
+  "Events",
+  "Trips",
+  "Communities",
+  "Networking",
+  "Meet New People",
+  "Volunteering",
+  "Startup Opportunities",
+  "Sports & Fitness",
+];
+
 const COLORS = ["#6366f1", "#22c55e", "#f59e0b", "#ec4899", "#06b6d4", "#a855f7", "#ef4444", "#84cc16"];
 
 function AdminPage() {
@@ -51,17 +63,27 @@ function AdminPage() {
     })();
   }, []);
 
+
   const interestData = useMemo(() => {
     const counts = new Map<string, number>();
+    for (const interest of ALL_INTERESTS) {
+      counts.set(interest, 0);
+    }
     for (const r of rows) {
-      const key = (r.interest || "Unknown").trim() || "Unknown";
-      counts.set(key, (counts.get(key) ?? 0) + 1);
+      const parts = (r.interest || "").split(",").map((s) => s.trim());
+      for (const part of parts) {
+        if (counts.has(part)) {
+          counts.set(part, (counts.get(part) ?? 0) + 1);
+        }
+      }
     }
     return Array.from(counts.entries())
       .map(([interest, count]) => ({ interest, count }))
       .sort((a, b) => b.count - a.count);
   }, [rows]);
 
+  const totalRespondents = rows.length;
+  const maxCount = interestData[0]?.count ?? 0;
   const topInterest = interestData[0];
 
   const downloadExcel = () => {
@@ -76,11 +98,15 @@ function AdminPage() {
     ws["!cols"] = [{ wch: 22 }, { wch: 22 }, { wch: 16 }, { wch: 18 }, { wch: 30 }];
 
     const summary = [
-      ["Interest", "Count"],
-      ...interestData.map((d) => [d.interest, d.count]),
+      ["Interest", "Count", "% of Respondents"],
+      ...interestData.map((d) => [
+        d.interest,
+        d.count,
+        totalRespondents ? Math.round((d.count / totalRespondents) * 100) / 100 : 0,
+      ]),
     ];
     const ws2 = XLSX.utils.aoa_to_sheet(summary);
-    ws2["!cols"] = [{ wch: 30 }, { wch: 10 }];
+    ws2["!cols"] = [{ wch: 30 }, { wch: 10 }, { wch: 16 }];
 
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Signups");
@@ -125,26 +151,55 @@ function AdminPage() {
           <div style={{ background: "#111", border: "1px solid #222", borderRadius: 12, padding: 20, marginBottom: 24 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 16, flexWrap: "wrap", gap: 8 }}>
               <h2 style={{ fontSize: 18, fontWeight: 600 }}>Responses by Interest</h2>
-              {topInterest && (
+              {topInterest && totalRespondents > 0 && (
                 <p style={{ opacity: 0.7, fontSize: 14 }}>
-                  Top: <span style={{ color: "#6366f1", fontWeight: 600 }}>{topInterest.interest}</span> ({topInterest.count})
+                  Top: <span style={{ color: "#6366f1", fontWeight: 600 }}>{topInterest.interest}</span> — {topInterest.count} ({Math.round((topInterest.count / totalRespondents) * 100)}%)
                 </p>
               )}
             </div>
-            <div style={{ width: "100%", height: 320 }}>
+            <div style={{ width: "100%", height: 360 }}>
               <ResponsiveContainer>
-                <BarChart data={interestData} margin={{ top: 10, right: 20, left: 0, bottom: 60 }}>
+                <BarChart data={interestData} margin={{ top: 24, right: 20, left: 0, bottom: 60 }}>
                   <CartesianGrid stroke="#222" strokeDasharray="3 3" />
                   <XAxis dataKey="interest" stroke="#888" tick={{ fontSize: 12, fill: "#bbb" }} interval={0} angle={-25} textAnchor="end" height={70} />
                   <YAxis stroke="#888" allowDecimals={false} tick={{ fontSize: 12, fill: "#bbb" }} />
-                  <Tooltip contentStyle={{ background: "#161616", border: "1px solid #333", borderRadius: 8, color: "#fff" }} cursor={{ fill: "rgba(99,102,241,0.1)" }} />
+                  <Tooltip
+                    content={({ active, payload }) => {
+                      if (active && payload && payload.length) {
+                        const count = payload[0].value as number;
+                        const pct = totalRespondents ? Math.round((count / totalRespondents) * 100) : 0;
+                        return (
+                          <div style={{ background: "#161616", border: "1px solid #333", borderRadius: 8, padding: "8px 12px", color: "#fff" }}>
+                            <div style={{ fontWeight: 600, marginBottom: 4 }}>{payload[0].payload.interest}</div>
+                            <div style={{ fontSize: 13, opacity: 0.85 }}>{count} selected ({pct}% of respondents)</div>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                    cursor={{ fill: "rgba(99,102,241,0.1)" }}
+                  />
                   <Bar dataKey="count" radius={[6, 6, 0, 0]}>
-                    {interestData.map((_, i) => (
-                      <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                    <LabelList dataKey="count" position="top" fill="#fff" fontSize={12} fontWeight={600} />
+                    {interestData.map((entry, i) => (
+                      <Cell key={i} fill={entry.count === maxCount ? "#6366f1" : COLORS[i % COLORS.length]} />
                     ))}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 12, marginTop: 20 }}>
+              {interestData.map((item) => {
+                const pct = totalRespondents ? Math.round((item.count / totalRespondents) * 100) : 0;
+                return (
+                  <div key={item.interest} style={{ background: "#161616", borderRadius: 8, padding: "14px 16px" }}>
+                    <div style={{ fontSize: 13, opacity: 0.7, marginBottom: 6 }}>{item.interest}</div>
+                    <div style={{ fontSize: 22, fontWeight: 700 }}>{item.count}</div>
+                    <div style={{ fontSize: 12, opacity: 0.6, marginTop: 2 }}>{pct}% of respondents</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
