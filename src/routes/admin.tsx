@@ -98,11 +98,15 @@ function AdminPage() {
     ws["!cols"] = [{ wch: 22 }, { wch: 22 }, { wch: 16 }, { wch: 18 }, { wch: 30 }];
 
     const summary = [
-      ["Interest", "Count"],
-      ...interestData.map((d) => [d.interest, d.count]),
+      ["Interest", "Count", "% of Respondents"],
+      ...interestData.map((d) => [
+        d.interest,
+        d.count,
+        totalRespondents ? Math.round((d.count / totalRespondents) * 100) / 100 : 0,
+      ]),
     ];
     const ws2 = XLSX.utils.aoa_to_sheet(summary);
-    ws2["!cols"] = [{ wch: 30 }, { wch: 10 }];
+    ws2["!cols"] = [{ wch: 30 }, { wch: 10 }, { wch: 16 }];
 
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Signups");
