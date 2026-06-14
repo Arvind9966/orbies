@@ -63,16 +63,6 @@ function AdminPage() {
     })();
   }, []);
 
-  const ALL_INTERESTS = [
-    "Events",
-    "Trips",
-    "Communities",
-    "Networking",
-    "Meet New People",
-    "Volunteering",
-    "Startup Opportunities",
-    "Sports & Fitness",
-  ];
 
   const interestData = useMemo(() => {
     const counts = new Map<string, number>();
