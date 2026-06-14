@@ -1,12 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
+import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
@@ -44,9 +37,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
@@ -78,16 +69,36 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Orbies — Discover what's happening around you" },
-      { name: "description", content: "Find communities, events, trips, volunteering opportunities and like-minded people in your city  all in one place." },
+      {
+        name: "description",
+        content:
+          "Find communities, events, trips, volunteering opportunities and like-minded people in your city  all in one place.",
+      },
       { name: "author", content: "Orbies" },
       { property: "og:title", content: "Orbies — Discover what's happening around you" },
-      { property: "og:description", content: "Find communities, events, trips, volunteering opportunities and like-minded people in your city  all in one place." },
+      {
+        property: "og:description",
+        content:
+          "Find communities, events, trips, volunteering opportunities and like-minded people in your city  all in one place.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Orbies — Discover what's happening around you" },
-      { name: "twitter:description", content: "Find communities, events, trips, volunteering opportunities and like-minded people in your city  all in one place." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/765559fb-5393-40a5-9bbf-0c4cbc7d6e52/id-preview-12d74b6f--1f0191bf-e510-4331-a011-89ad99300421.lovable.app-1781258926948.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/765559fb-5393-40a5-9bbf-0c4cbc7d6e52/id-preview-12d74b6f--1f0191bf-e510-4331-a011-89ad99300421.lovable.app-1781258926948.png" },
+      {
+        name: "twitter:description",
+        content:
+          "Find communities, events, trips, volunteering opportunities and like-minded people in your city  all in one place.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/765559fb-5393-40a5-9bbf-0c4cbc7d6e52/id-preview-12d74b6f--1f0191bf-e510-4331-a011-89ad99300421.lovable.app-1781258926948.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/765559fb-5393-40a5-9bbf-0c4cbc7d6e52/id-preview-12d74b6f--1f0191bf-e510-4331-a011-89ad99300421.lovable.app-1781258926948.png",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -121,7 +132,21 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://connect.facebook.net/en_US/fbevents.js";
+    document.head.appendChild(script);
 
+    window.fbq =
+      window.fbq ||
+      function (...args) {
+        (window.fbq.q = window.fbq.q || []).push(args);
+      };
+
+    window.fbq("init", "2276839729389916");
+    window.fbq("track", "PageView");
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
