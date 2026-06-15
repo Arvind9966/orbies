@@ -216,7 +216,7 @@ function Hero({ onOpen }: { onOpen: () => void }) {
           onClick={onOpen}
           className="animate-fade-rise-delay-2 mt-6 rounded-full bg-black px-9 py-3 text-sm text-white transition-transform hover:scale-[1.03] md:self-center md:mt-3 md:py-3"
         >
-          Click Here to explore
+          Get Early Access
         </button>
       </section>
       <DesktopVideo />
